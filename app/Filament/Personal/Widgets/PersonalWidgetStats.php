@@ -8,6 +8,7 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Services\TimesheetService;
 
 class PersonalWidgetStats extends BaseWidget
 {
@@ -20,13 +21,12 @@ class PersonalWidgetStats extends BaseWidget
             ->where('user_id', Auth::user()->id)
             ->count();
 
-        $hoursWorkedToday = $this->calculateHoursWorkedToday();
+        $timesheetService = new TimesheetService();
+        $hoursWorkedToday = $timesheetService->calculateHoursWorkedToday();
+        $pauseTimeToday = $timesheetService->calculateTotalPauseToday();
         
-        $activeTimesheet = Timesheet::where('user_id', Auth::user()->id)
-            ->whereNull('day_out')
-            ->where('type', 'work')
-            ->first();
-        
+        $activeTimesheet = $timesheetService->getActiveTimesheet();
+        $activePause = $timesheetService->getActivePause();
 
         return [
             Stat::make('Total Pending Holidays', $totalPendingHolidays)
@@ -34,31 +34,13 @@ class PersonalWidgetStats extends BaseWidget
             Stat::make('Total Approved Holidays', $totalApprovedHolidays)
                 ->icon('heroicon-o-clock'),
             Stat::make('Hours Worked Today', $hoursWorkedToday)
-                ->description($activeTimesheet ? 'Currently working' : 'Not working')
-                ->descriptionIcon($activeTimesheet ? 'heroicon-o-play' : 'heroicon-o-pause')
-                ->color($activeTimesheet ? 'success' : 'danger'),
+                ->description($activeTimesheet ? 'Currently working' : ($activePause ? 'On break' : 'Not working'))
+                ->descriptionIcon($activeTimesheet ? 'heroicon-o-play' : ($activePause ? 'heroicon-o-pause' : 'heroicon-o-stop'))
+                ->color($activeTimesheet ? 'success' : ($activePause ? 'warning' : 'danger')),
+            Stat::make('Total Pause Time', $pauseTimeToday)
+                ->description($activePause ? 'Currently on break' : 'Total pauses today')
+                ->descriptionIcon('heroicon-o-clock')
+                ->color($activePause ? 'warning' : 'info'),
         ];
-    }
-
-    private function calculateHoursWorkedToday(): string
-    {
-        $today = Carbon::today();
-        $timesheet = Timesheet::where('user_id', Auth::user()->id)
-            ->whereDate('day_in', $today)
-            ->where('type', 'work')
-            ->first();
-
-        if (!$timesheet) {
-            return '0:00';
-        }
-
-        $dayIn = Carbon::parse($timesheet->day_in);
-        $dayOut = $timesheet->day_out ? Carbon::parse($timesheet->day_out) : Carbon::now();
-        
-        $diffInMinutes = $dayIn->diffInMinutes($dayOut);
-        $hours = floor($diffInMinutes / 60);
-        $minutes = $diffInMinutes % 60;
-
-        return sprintf('%d:%02d', $hours, $minutes);
     }
 }

@@ -3,11 +3,9 @@
 namespace App\Filament\Personal\Resources\TimesheetResource\Pages;
 
 use App\Filament\Personal\Resources\TimesheetResource;
-use App\Models\Timesheet;
+use App\Services\TimesheetService;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class ListTimesheets extends ListRecords
 {
@@ -15,42 +13,34 @@ class ListTimesheets extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        $activeTimesheet = Timesheet::where('user_id', Auth::user()->id)
-            ->whereNull('day_out')
-            ->where('type', 'work')
-            ->first();
-
-        $isWorking = $activeTimesheet ? true : false;
+        $timesheetService = new TimesheetService();
+        $activeTimesheet = $timesheetService->getActiveTimesheet();
+        $activePause = $timesheetService->getActivePause();
 
         return [
             Actions\Action::make('startWork')
                 ->label('Iniciar trabajo')
-                ->visible(!$isWorking)
-                ->disabled($isWorking)
+                ->visible(!$activeTimesheet && !$activePause)
                 ->requiresConfirmation()
                 ->icon('heroicon-o-play')
-                ->action(function () {
-                    Timesheet::create([
-                        'user_id' => Auth::user()->id,
-                        'calendar_id' => 1,
-                        'type' => 'work',
-                        'day_in' => now(),
-                    ]);
-                }),
+                ->action(fn () => $timesheetService->startWork()),
+
             Actions\Action::make('pauseWork')
                 ->label('Pausar trabajo')
-                ->visible($isWorking)
-                ->disabled(!$isWorking)
+                ->visible($activeTimesheet && !$activePause)
                 ->requiresConfirmation()
                 ->icon('heroicon-o-pause')
                 ->color('warning')
-                ->action(function () use ($activeTimesheet) {
-                    if ($activeTimesheet) {
-                        $activeTimesheet->update([
-                            'day_out' => now(),
-                        ]);
-                    }
-                }),
+                ->action(fn () => $timesheetService->pauseWork()),
+
+            Actions\Action::make('resumeWork')
+                ->label('Reanudar trabajo')
+                ->visible(!$activeTimesheet && $activePause)
+                ->requiresConfirmation()
+                ->icon('heroicon-o-play')
+                ->color('success')
+                ->action(fn () => $timesheetService->resumeWork()),
+
             Actions\CreateAction::make(),
         ];
     }
