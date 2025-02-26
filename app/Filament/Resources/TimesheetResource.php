@@ -16,8 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TimesheetResource extends Resource
 {
     protected static ?string $model = Timesheet::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Employees Management';
+    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -29,7 +30,13 @@ class TimesheetResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('type')
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'work' => 'Work',
+                        'vacation' => 'Vacation',
+                        'sick' => 'Sick',
+                        'holiday' => 'Holiday',
+                    ])
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')
                     ->required(),
@@ -44,17 +51,21 @@ class TimesheetResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
                     ->dateTime()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day_out')
                     ->dateTime()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -67,9 +78,18 @@ class TimesheetResource extends Resource
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('type')
+                    ->options([
+                        'work' => 'Work',
+                        'vacation' => 'Vacation',
+                        'sick' => 'Sick',
+                        'holiday' => 'Holiday',
+                    ]),
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
