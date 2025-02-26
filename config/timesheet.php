@@ -18,6 +18,14 @@ return [
             'color' => 'danger'
         ],
     ],
+    'types' => [
+        'work' => [
+            'color' => 'primary',
+        ],
+        'pause' => [
+            'color' => 'warning',
+        ]
+    ],
     'actions' => [
         'start' => [
             'label' => 'filament.timesheet.actions.start.label',

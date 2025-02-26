@@ -79,6 +79,11 @@ class TimesheetResource extends Resource
                 Tables\Columns\TextColumn::make('type')
                     ->label(__('filament.tables.timesheet.type'))
                     ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'work' => 'success',
+                        'pause' => 'danger',
+                        default => 'info',
+                    })
                     ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
