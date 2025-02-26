@@ -20,9 +20,14 @@ class HolidayResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?int $navigationSort = 3;
 
-    public static function getNavigationLabel(): string
+    public static function getLabel(): string
     {
-        return __('filament.navigation.resources.holidays');
+        return __('filament.resources.holidays.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament.resources.holidays.plural_label');
     }
 
     public static function getNavigationGroup(): ?string
@@ -37,17 +42,21 @@ class HolidayResource extends Resource
             ->schema([
                 Forms\Components\Select::make('calendar_id')
                     ->relationship('calendar', 'name')
+                    ->label(__('filament.forms.holiday.calendar'))
                     ->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
+                    ->label(__('filament.forms.holiday.user'))
                     ->required(),
                 Forms\Components\DatePicker::make('day')
+                    ->label(__('filament.forms.holiday.day'))
                     ->required(),
                 Forms\Components\Select::make('type')
+                    ->label(__('filament.forms.holiday.type'))
                     ->options([
-                        'decline' => __('filament.options.type.decline'),
-                        'approved' => __('filament.options.type.approved'),
-                        'pending' => __('filament.options.type.pending'),
+                        'decline' => __('filament.enums.status.decline'),
+                        'approved' => __('filament.enums.status.approved'),
+                        'pending' => __('filament.enums.status.pending'),
                     ])
                     ->required(),
             ]);
@@ -58,39 +67,46 @@ class HolidayResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
+                    ->label(__('filament.tables.holiday.calendar'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
+                    ->label(__('filament.tables.holiday.user'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day')
+                    ->label(__('filament.tables.holiday.day'))
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->label(__('filament.tables.holiday.type'))
                     ->badge()
-                    ->color(fn (string $value) => match ($value) {
+                    ->color(fn (string $state): string => match ($state) {
                         'decline' => 'danger',
                         'approved' => 'success',
                         'pending' => 'warning',
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament.tables.holiday.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament.tables.holiday.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
+                    ->label(__('filament.filters.holiday.type'))
                     ->options([
-                        'decline' => 'Decline',
-                        'approved' => 'Approved',
-                        'pending' => 'Pending',
+                        'decline' => __('filament.enums.status.decline'),
+                        'approved' => __('filament.enums.status.approved'),
+                        'pending' => __('filament.enums.status.pending'),
                     ]),
             ])
             ->actions([
