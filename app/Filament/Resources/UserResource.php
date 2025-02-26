@@ -44,6 +44,11 @@ class UserResource extends Resource
                             ->password()
                             ->hiddenOn('edit')
                             ->required(),
+                        Forms\Components\Select::make('roles')
+                            ->relationship('roles', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
                     ])),
                 Forms\Components\Section::make('Address Information')
                     ->columns(3)
