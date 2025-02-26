@@ -20,23 +20,44 @@ class CityResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
     protected static ?int $navigationSort = 5;
 
+    public static function getLabel(): string
+    {
+        return __('filament.resources.cities.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament.resources.cities.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.navigation.groups.system-management');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('country_id')
                     ->relationship('country', 'name')
+                    ->label(__('filament.forms.city.country'))
                     ->required(),
                 Forms\Components\Select::make('state_id')
                     ->relationship('state', 'name')
+                    ->label(__('filament.forms.city.state'))
                     ->required(),
                 Forms\Components\TextInput::make('name')
+                    ->label(__('filament.forms.city.name'))
                     ->required(),
                 Forms\Components\TextInput::make('latitude')
+                    ->label(__('filament.forms.city.latitude'))
                     ->numeric(),
                 Forms\Components\TextInput::make('longitude')
+                    ->label(__('filament.forms.city.longitude'))
                     ->numeric(),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('filament.forms.city.is_active'))
                     ->required(),
             ]);
     }
@@ -46,30 +67,39 @@ class CityResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('country.name')
+                    ->label(__('filament.tables.city.country'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('state.name')
+                    ->label(__('filament.tables.city.state'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('filament.tables.city.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
+                    ->label(__('filament.tables.city.latitude'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('longitude')
+                    ->label(__('filament.tables.city.longitude'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label(__('filament.tables.city.is_active'))
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament.tables.city.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament.tables.city.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
+                    ->label(__('filament.tables.city.deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
