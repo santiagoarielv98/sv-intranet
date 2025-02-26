@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Personal\Resources;
 
-use App\Filament\Resources\TimesheetResource\Pages;
-use App\Filament\Resources\TimesheetResource\RelationManagers;
+use App\Filament\Personal\Resources\TimesheetResource\Pages;
+use App\Filament\Personal\Resources\TimesheetResource\RelationManagers;
 use App\Models\Timesheet;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -12,13 +12,18 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class TimesheetResource extends Resource
 {
     protected static ?string $model = Timesheet::class;
-    protected static ?string $navigationGroup = 'Employees Management';
-    protected static ?string $navigationIcon = 'heroicon-o-table-cells';
-    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
+    }
 
     public static function form(Form $form): Form
     {
@@ -26,9 +31,6 @@ class TimesheetResource extends Resource
             ->schema([
                 Forms\Components\Select::make('calendar_id')
                     ->relationship('calendar', 'name')
-                    ->required(),
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->options([
@@ -83,11 +85,10 @@ class TimesheetResource extends Resource
                         'vacation' => 'Vacation',
                         'sick' => 'Sick',
                         'holiday' => 'Holiday',
-                    ]),                
-            ])
+                    ]),
+                ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
