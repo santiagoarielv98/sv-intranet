@@ -1,66 +1,80 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SV Intranet
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Badge en Desarollo](https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/santiagoariel/sv-intranet?style=for-the-badge)
+![GitHub license](https://img.shields.io/github/license/santiagoariel/sv-intranet?style=for-the-badge)
 
-## About Laravel
+<!-- [![Demo en Vivo](https://img.shields.io/badge/🔗_Demo_en_Vivo-Click_aquí-blue?style=for-the-badge&logo=vercel)](https://tudemo.com) -->
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Descripción
+SV Intranet es una aplicación web desarrollada con Laravel y Filament que tiene como objetivo gestionar y optimizar los procesos internos de una organización. La aplicación permite a los usuarios gestionar empleados, departamentos, vacaciones, horarios de trabajo, y más.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<!-- ## 🖼️ Capturas de Pantalla
+![Vista Previa](/ruta/a/tu/imagen.png) -->
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Características Destacadas
+- Gestión de empleados
+- Gestión de departamentos
+- Gestión de vacaciones
+- Registro y seguimiento de horarios de trabajo
+- Integración con APIs externas
+- Optimización de rendimiento
+- Gestión de roles y permisos
 
-## Learning Laravel
+## 🚀 Demo Rápida
+`git clone https://github.com/santiagoariel/sv-intranet.git`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🛠️ Tecnologías Utilizadas
+| Frontend          | Backend           |
+|-------------------|-------------------|
+| Filament          | Laravel           |
+| Livewire          | SQLite            |
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## ⚙️ Instalación
+1. Clona el repositorio:
+```bash
+git clone https://github.com/santiagoariel/sv-intranet.git
+```
+2. Instala dependencias:
+```bash
+composer install
+```
+3. Configura variables de entorno (crea un archivo `.env` con tus credenciales)
+4. Inicia el servidor:
+```bash
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🌐 Despliegue
+Guía breve para despliegue en servicios populares:
+- **Vercel**: `vercel deploy`
+- **Netlify**: Importa tu repositorio directamente
+- **Heroku**: Crea un nuevo app y conecta tu GitHub
 
-## Laravel Sponsors
+## 🤝 Cómo Contribuir
+1. Haz un Fork del proyecto
+2. Crea tu Feature Branch (`git checkout -b feature/NuevaFuncionalidad`)
+3. Commit tus cambios (`git commit -m 'Agrega NuevaFuncionalidad'`)
+4. Push a la Branch (`git push origin feature/NuevaFuncionalidad`)
+5. Abre un Pull Request
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 📄 Licencia
+Distribuido bajo la licencia [MIT](https://choosealicense.com/licenses/mit/).
 
-### Premium Partners
+## 📬 Contacto
+Santiago Ariel - [@tu_usuario_twitter](https://twitter.com/tu_usuario) - [tu@email.com](mailto:tu@email.com)
+Enlace al proyecto: [https://github.com/santiagoariel/sv-intranet](https://github.com/santiagoariel/sv-intranet)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## 🙌 Reconocimientos
+- Inspirado en [Proyecto Similar](https://ejemplo.com)
 
-## Contributing
+## 🔮 Futuras Características
+- Notificaciones en tiempo real
+- Integración con servicios de terceros
+- Soporte multilenguaje
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🎯 MVP
+- Gestión de usuarios
+- Gestión de departamentos
+- Gestión de vacaciones
+- Registro de horarios de trabajo
