@@ -13,6 +13,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class TimesheetResource extends Resource
 {
@@ -87,13 +89,18 @@ class TimesheetResource extends Resource
                         'sick' => 'Sick',
                         'holiday' => 'Holiday',
                     ]),
-                ])
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    ExportBulkAction::make()->exports([
+                        ExcelExport::make('table')->fromTable()
+                        ->withFilename('Timesheets_' . date('Y-m-d') . '_export'),
+                        ExcelExport::make('form')->fromForm(),
+                    ]),
                 ]),
             ]);
     }
