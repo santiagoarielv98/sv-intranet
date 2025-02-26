@@ -49,9 +49,7 @@ class TimesheetResource extends Resource
                 Forms\Components\Select::make('type')
                     ->options([
                         'work' => __('filament.enums.type.work'),
-                        'vacation' => __('filament.enums.type.vacation'),
-                        'sick' => __('filament.enums.type.sick'),
-                        'holiday' => __('filament.enums.type.holiday'),
+                        'pause' => __('filament.enums.type.pause'),
                     ])
                     ->label(__('filament.common.fields.type'))
                     ->required(),
@@ -80,6 +78,8 @@ class TimesheetResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
                     ->label(__('filament.tables.timesheet.type'))
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
                     ->label(__('filament.tables.timesheet.day_in'))
@@ -107,10 +107,8 @@ class TimesheetResource extends Resource
                     ->label(__('filament.filters.timesheet.type'))
                     ->options([
                         'work' => __('filament.enums.type.work'),
-                        'vacation' => __('filament.enums.type.vacation'),
-                        'sick' => __('filament.enums.type.sick'),
-                        'holiday' => __('filament.enums.type.holiday'),
-                    ]),                
+                        'pause' => __('filament.enums.type.pause'),
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

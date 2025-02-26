@@ -23,6 +23,16 @@ class TimesheetResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?int $navigationSort = 3;
 
+    public static function getLabel(): string
+    {
+        return __('filament.resources.timesheet.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament.resources.timesheet.plural_label');
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
@@ -33,19 +43,21 @@ class TimesheetResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('calendar_id')
+                    ->label(__('filament.forms.timesheet.calendar'))
                     ->relationship('calendar', 'name')
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->options([
-                        'work' => 'Work',
-                        'vacation' => 'Vacation',
-                        'sick' => 'Sick',
-                        'holiday' => 'Holiday',
+                        'work' => __('filament.enums.type.work'),
+                        'pause' => __('filament.enums.type.pause'),
                     ])
+                    ->label(__('filament.common.fields.type'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')
+                    ->label(__('filament.forms.timesheet.day_in'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_out')
+                    ->label(__('filament.forms.timesheet.day_out'))
                     ->required(),
             ]);
     }
@@ -55,28 +67,35 @@ class TimesheetResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
-                    ->numeric()
+                    ->label(__('filament.tables.timesheet.calendar'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
+                    ->label(__('filament.tables.timesheet.user'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->label(__('filament.tables.timesheet.type'))
+                    ->badge()
+                    ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
+                    ->label(__('filament.tables.timesheet.day_in'))
                     ->dateTime()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day_out')
+                    ->label(__('filament.tables.timesheet.day_out'))
                     ->dateTime()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament.tables.timesheet.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament.tables.timesheet.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -84,10 +103,8 @@ class TimesheetResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
                     ->options([
-                        'work' => 'Work',
-                        'vacation' => 'Vacation',
-                        'sick' => 'Sick',
-                        'holiday' => 'Holiday',
+                        'work' => __('filament.enums.type.work'),
+                        'pause' => __('filament.enums.type.pause'),
                     ]),
             ])
             ->actions([
@@ -98,7 +115,7 @@ class TimesheetResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     ExportBulkAction::make()->exports([
                         ExcelExport::make('table')->fromTable()
-                        ->withFilename('Timesheets_' . date('Y-m-d') . '_export'),
+                            ->withFilename('Timesheets_' . date('Y-m-d') . '_export'),
                         ExcelExport::make('form')->fromForm(),
                     ]),
                 ]),

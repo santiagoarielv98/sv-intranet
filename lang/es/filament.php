@@ -76,9 +76,7 @@ return [
         ],
         'type' => [
             'work' => 'Trabajo',
-            'vacation' => 'Vacaciones',
-            'sick' => 'Enfermedad',
-            'holiday' => 'Feriado',
+            'pause' => 'Pausa',
         ],
     ],
 

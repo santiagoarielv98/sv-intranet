@@ -76,9 +76,7 @@ return [
         ],
         'type' => [
             'work' => 'Work',
-            'vacation' => 'Vacation',
-            'sick' => 'Sick',
-            'holiday' => 'Holiday',
+            'pause' => 'Pause',
         ],
     ],
 
