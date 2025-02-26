@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->enum('type', ['work', 'vacation', 'sick', 'holiday'])->default('work');
             $table->timestamp('day_in');
-            $table->timestamp('day_out');
+            $table->timestamp('day_out')->nullable();
             $table->timestamps();
         });
     }

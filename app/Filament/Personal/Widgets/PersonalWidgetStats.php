@@ -22,13 +22,21 @@ class PersonalWidgetStats extends BaseWidget
 
         $hoursWorkedToday = $this->calculateHoursWorkedToday();
         
+        $activeTimesheet = Timesheet::where('user_id', Auth::user()->id)
+            ->whereNull('day_out')
+            ->where('type', 'work')
+            ->first();
+        
+
         return [
             Stat::make('Total Pending Holidays', $totalPendingHolidays)
                 ->icon('heroicon-o-clock'),
             Stat::make('Total Approved Holidays', $totalApprovedHolidays)
                 ->icon('heroicon-o-clock'),
             Stat::make('Hours Worked Today', $hoursWorkedToday)
-                ->icon('heroicon-o-clock'),
+                ->description($activeTimesheet ? 'Currently working' : 'Not working')
+                ->descriptionIcon($activeTimesheet ? 'heroicon-o-play' : 'heroicon-o-pause')
+                ->color($activeTimesheet ? 'success' : 'danger'),
         ];
     }
 

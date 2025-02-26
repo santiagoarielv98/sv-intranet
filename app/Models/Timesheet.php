@@ -10,6 +10,14 @@ class Timesheet extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'calendar_id',
+        'user_id',
+        'type',
+        'day_in',
+        'day_out',
+    ];
+
     /**
      * Get the user that owns the Holiday
      *
