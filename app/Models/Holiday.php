@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Holiday extends Model
 {
+
+    protected $fillable = [
+        'calendar_id',
+        'user_id',
+        'day',
+        'type',
+    ];
     //
     use HasFactory;
 
