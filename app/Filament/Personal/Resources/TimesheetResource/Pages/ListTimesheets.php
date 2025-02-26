@@ -18,41 +18,41 @@ class ListTimesheets extends ListRecords
 
         return [
             Actions\Action::make('startWork')
-                ->label($config['start']['label'])
+                ->label(__($config['start']['label']))
                 ->visible($timesheetService->canStartWork())
                 ->requiresConfirmation()
-                ->modalHeading($config['start']['heading'])
-                ->modalDescription($config['start']['description'])
+                ->modalHeading(__($config['start']['heading']))
+                ->modalDescription(__($config['start']['description']))
                 ->icon('heroicon-o-play')
                 ->color('success')
                 ->action(fn() => $timesheetService->startWork()),
 
             Actions\Action::make('pauseWork')
-                ->label($config['pause']['label'])
+                ->label(__($config['pause']['label']))
                 ->visible($timesheetService->canPause())
                 ->requiresConfirmation()
-                ->modalHeading($config['pause']['heading'])
-                ->modalDescription($config['pause']['description'])
+                ->modalHeading(__($config['pause']['heading']))
+                ->modalDescription(__($config['pause']['description']))
                 ->icon('heroicon-o-pause')
                 ->color('warning')
                 ->action(fn() => $timesheetService->pauseWork()),
 
             Actions\Action::make('resumeWork')
-                ->label($config['resume']['label'])
+                ->label(__($config['resume']['label']))
                 ->visible($timesheetService->canResume())
                 ->requiresConfirmation()
-                ->modalHeading($config['resume']['heading'])
-                ->modalDescription($config['resume']['description'])
+                ->modalHeading(__($config['resume']['heading']))
+                ->modalDescription(__($config['resume']['description']))
                 ->icon('heroicon-o-play')
                 ->color('success')
                 ->action(fn() => $timesheetService->resumeWork()),
 
             Actions\Action::make('stopWork')
-                ->label($config['stop']['label'])
+                ->label(__($config['stop']['label']))
                 ->visible($timesheetService->canStop())
                 ->requiresConfirmation()
-                ->modalHeading($config['stop']['heading'])
-                ->modalDescription($config['stop']['description'])
+                ->modalHeading(__($config['stop']['heading']))
+                ->modalDescription(__($config['stop']['description']))
                 ->icon('heroicon-o-stop')
                 ->color('danger')
                 ->action(fn() => $timesheetService->stopWork()),

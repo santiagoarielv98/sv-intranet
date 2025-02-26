@@ -3,41 +3,41 @@
 return [
     'status' => [
         'working' => [
-            'description' => 'Working',
+            'description' => 'filament.timesheet.status.working',
             'icon' => 'heroicon-o-play',
             'color' => 'success'
         ],
         'paused' => [
-            'description' => 'On Break',
+            'description' => 'filament.timesheet.status.paused',
             'icon' => 'heroicon-o-pause',
             'color' => 'warning'
         ],
         'stopped' => [
-            'description' => 'Not Working',
+            'description' => 'filament.timesheet.status.stopped',
             'icon' => 'heroicon-o-stop',
             'color' => 'danger'
         ],
     ],
     'actions' => [
         'start' => [
-            'label' => 'Start Work',
-            'heading' => 'Start working?',
-            'description' => 'This will start tracking your work time.',
+            'label' => 'filament.timesheet.actions.start.label',
+            'heading' => 'filament.timesheet.actions.start.heading',
+            'description' => 'filament.timesheet.actions.start.description',
         ],
         'pause' => [
-            'label' => 'Take Break',
-            'heading' => 'Take a break?',
-            'description' => 'This will pause your work time tracking.',
+            'label' => 'filament.timesheet.actions.pause.label',
+            'heading' => 'filament.timesheet.actions.pause.heading',
+            'description' => 'filament.timesheet.actions.pause.description',
         ],
         'resume' => [
-            'label' => 'Resume Work',
-            'heading' => 'Resume working?',
-            'description' => 'This will end your break and resume work time tracking.',
+            'label' => 'filament.timesheet.actions.resume.label',
+            'heading' => 'filament.timesheet.actions.resume.heading',
+            'description' => 'filament.timesheet.actions.resume.description',
         ],
         'stop' => [
-            'label' => 'End Work',
-            'heading' => 'End work?',
-            'description' => 'This will end your current work session.',
+            'label' => 'filament.timesheet.actions.stop.label',
+            'heading' => 'filament.timesheet.actions.stop.heading',
+            'description' => 'filament.timesheet.actions.stop.description',
         ],
     ],
 ];

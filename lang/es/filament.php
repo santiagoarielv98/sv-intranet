@@ -236,4 +236,34 @@ return [
             'type' => 'Estado',
         ],
     ],
+
+    'timesheet' => [
+        'status' => [
+            'working' => 'Trabajando',
+            'paused' => 'En Pausa',
+            'stopped' => 'No Trabajando',
+        ],
+        'actions' => [
+            'start' => [
+                'label' => 'Iniciar Trabajo',
+                'heading' => '¿Iniciar trabajo?',
+                'description' => 'Esto comenzará a registrar tu tiempo de trabajo.',
+            ],
+            'pause' => [
+                'label' => 'Tomar Descanso',
+                'heading' => '¿Tomar un descanso?',
+                'description' => 'Esto pausará el registro de tu tiempo de trabajo.',
+            ],
+            'resume' => [
+                'label' => 'Reanudar Trabajo',
+                'heading' => '¿Reanudar trabajo?',
+                'description' => 'Esto finalizará tu descanso y reanudará el registro de tiempo de trabajo.',
+            ],
+            'stop' => [
+                'label' => 'Finalizar Trabajo',
+                'heading' => '¿Finalizar trabajo?',
+                'description' => 'Esto finalizará tu sesión de trabajo actual.',
+            ],
+        ],
+    ],
 ];
