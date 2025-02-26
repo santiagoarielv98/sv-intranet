@@ -100,7 +100,7 @@ class User extends Authenticatable
      */
     public function departments(): BelongsToMany
     {
-        return $this->belongsToMany(Departament::class);
+        return $this->belongsToMany(Department::class);
     }
 
     /**
