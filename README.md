@@ -62,7 +62,6 @@ Guía breve para despliegue en servicios populares:
 Distribuido bajo la licencia [MIT](https://choosealicense.com/licenses/mit/).
 
 ## 📬 Contacto
-Santiago Ariel - [@tu_usuario_twitter](https://twitter.com/tu_usuario) - [tu@email.com](mailto:tu@email.com)
 Enlace al proyecto: [https://github.com/santiagoariel/sv-intranet](https://github.com/santiagoariel/sv-intranet)
 
 ## 🙌 Reconocimientos
@@ -78,3 +77,28 @@ Enlace al proyecto: [https://github.com/santiagoariel/sv-intranet](https://githu
 - Gestión de departamentos
 - Gestión de vacaciones
 - Registro de horarios de trabajo
+
+## MVP - Aplicación de Gestión de Empleados
+### 1. Módulos Principales
+#### 🔹 Gestión de Empleados
+- Crear, editar y eliminar empleados.
+- Asignar empleados a departamentos.
+- Registrar información básica (nombre, email, teléfono, puesto, fecha de ingreso).
+
+#### 🔹 Gestión de Departamentos
+- Crear, editar y eliminar departamentos.
+- Listar empleados por departamento.
+
+#### 🔹 Gestión de Horarios de Trabajo
+- Asignar horarios de trabajo a empleados.
+- Registrar y modificar turnos (mañana, tarde, noche).
+- Gestionar horas extras.
+
+#### 🔹 Gestión de Vacaciones y Permisos
+- Solicitud y aprobación de vacaciones.
+- Control de días disponibles por empleado.
+- Registro de ausencias justificadas o no.
+
+#### 🔹 Autenticación y Roles
+- Inicio de sesión y registro de usuarios.
+- Roles de usuario: Administrador (gestiona todo) y Empleado (solo visualiza su información y solicita permisos).
