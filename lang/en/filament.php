@@ -139,6 +139,13 @@ return [
             'longitude' => 'Longitude',
             'is_active' => 'Active',
         ],
+        'department' => [
+            'name' => 'Name',
+            'description' => 'Description',
+            'manager' => 'Manager',
+            'parent' => 'Parent Department',
+            'is_active' => 'Active',
+        ],
     ],
 
     'tables' => [
@@ -206,6 +213,16 @@ return [
             'name' => 'Name',
             'latitude' => 'Latitude',
             'longitude' => 'Longitude',
+            'is_active' => 'Active',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+            'deleted_at' => 'Deleted At',
+        ],
+        'department' => [
+            'name' => 'Name',
+            'description' => 'Description',
+            'manager' => 'Manager',
+            'parent' => 'Parent Department',
             'is_active' => 'Active',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
