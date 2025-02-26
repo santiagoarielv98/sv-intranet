@@ -24,6 +24,7 @@ class PersonalPanelProvider extends PanelProvider
     {
         return $panel
             ->id('personal')
+            ->default()
             ->path('personal')
             ->login()
             ->colors([
