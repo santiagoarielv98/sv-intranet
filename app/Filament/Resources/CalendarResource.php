@@ -19,9 +19,14 @@ class CalendarResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
     protected static ?int $navigationSort = 6;
 
-    public static function getNavigationLabel(): string
+    public static function getLabel(): string
     {
-        return __('filament.navigation.resources.calendars');
+        return __('filament.resources.calendars.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament.resources.calendars.plural_label');
     }
 
     public static function getNavigationGroup(): ?string
@@ -34,11 +39,14 @@ class CalendarResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('filament.forms.calendar.name'))
                     ->required(),
                 Forms\Components\TextInput::make('year')
+                    ->label(__('filament.forms.calendar.year'))
                     ->required()
                     ->numeric(),
                 Forms\Components\Toggle::make('active')
+                    ->label(__('filament.forms.calendar.active'))
                     ->required(),
             ]);
     }
@@ -48,17 +56,22 @@ class CalendarResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('filament.tables.calendar.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('year')
+                    ->label(__('filament.tables.calendar.year'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('active')
+                    ->label(__('filament.tables.calendar.active'))
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament.tables.calendar.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament.tables.calendar.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

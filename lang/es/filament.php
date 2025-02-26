@@ -96,6 +96,11 @@ return [
             'day' => 'Día',
             'type' => 'Estado',
         ],
+        'calendar' => [
+            'name' => 'Nombre',
+            'year' => 'Año',
+            'active' => 'Activo',
+        ],
     ],
 
     'tables' => [
@@ -113,6 +118,13 @@ return [
             'user' => 'Usuario',
             'day' => 'Día',
             'type' => 'Estado',
+            'created_at' => 'Creado',
+            'updated_at' => 'Actualizado',
+        ],
+        'calendar' => [
+            'name' => 'Nombre',
+            'year' => 'Año',
+            'active' => 'Activo',
             'created_at' => 'Creado',
             'updated_at' => 'Actualizado',
         ],
