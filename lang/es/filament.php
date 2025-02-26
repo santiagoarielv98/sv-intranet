@@ -24,6 +24,7 @@ return [
     'fields' => [
         'name' => 'Nombre',
         'email' => 'Correo Electrónico',
+        'email_verified_at' => 'Correo Electrónico Verificado',
         'password' => 'Contraseña',
         'roles' => 'Roles',
         'country' => 'País',
@@ -35,6 +36,8 @@ return [
         'day' => 'Día',
         'active' => 'Activo',
         'year' => 'Año',
+        'created_at' => 'Creado En',
+        'updated_at' => 'Actualizado En',
     ],
     'options' => [
         'type' => [

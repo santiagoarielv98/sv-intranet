@@ -24,6 +24,7 @@ return [
     'fields' => [
         'name' => 'Name',
         'email' => 'Email',
+        'email_verified_at' => 'Email Verified',
         'password' => 'Password',
         'roles' => 'Roles',
         'country' => 'Country',
@@ -35,6 +36,8 @@ return [
         'day' => 'Day',
         'active' => 'Active',
         'year' => 'Year',
+        'created_at' => 'Created At',
+        'updated_at' => 'Updated At',
     ],
     'options' => [
         'type' => [

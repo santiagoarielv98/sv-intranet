@@ -16,9 +16,20 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TimesheetResource extends Resource
 {
     protected static ?string $model = Timesheet::class;
-    protected static ?string $navigationGroup = 'Employees Management';
+    // protected static ?string $navigationGroup = __('filament.navigation.groups.employees-management');
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?int $navigationSort = 3;
+
+    public static function getLabel(): string
+    {
+        return __('filament.navigation.resources.timesheets');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.navigation.groups.employees-management');
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -32,10 +43,10 @@ class TimesheetResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->options([
-                        'work' => 'Work',
-                        'vacation' => 'Vacation',
-                        'sick' => 'Sick',
-                        'holiday' => 'Holiday',
+                        'work' => __('filament.options.type.work'),
+                        'vacation' => __('filament.options.type.vacation'),
+                        'sick' => __('filament.options.type.sick'),
+                        'holiday' => __('filament.options.type.holiday'),
                     ])
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')

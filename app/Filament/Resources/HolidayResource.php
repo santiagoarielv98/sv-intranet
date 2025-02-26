@@ -16,9 +16,20 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class HolidayResource extends Resource
 {
     protected static ?string $model = Holiday::class;
-    protected static ?string $navigationGroup = 'Employees Management';
+    // protected static ?string $navigationGroup = __('filament.navigation.groups.employees-management');
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?int $navigationSort = 3;
+
+    public static function getNavigationLabel(): string
+    {
+        return __('filament.navigation.resources.holidays');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.navigation.groups.employees-management');
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -32,12 +43,11 @@ class HolidayResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('day')
                     ->required(),
-                // Forms\Components\TextInput::make('type')
                 Forms\Components\Select::make('type')
                     ->options([
-                        'decline' => 'Decline',
-                        'approved' => 'Approved',
-                        'pending' => 'Pending',
+                        'decline' => __('filament.options.type.decline'),
+                        'approved' => __('filament.options.type.approved'),
+                        'pending' => __('filament.options.type.pending'),
                     ])
                     ->required(),
             ]);
