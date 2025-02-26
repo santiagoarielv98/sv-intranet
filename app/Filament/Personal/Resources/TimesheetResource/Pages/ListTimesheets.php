@@ -14,32 +14,48 @@ class ListTimesheets extends ListRecords
     protected function getHeaderActions(): array
     {
         $timesheetService = new TimesheetService();
-        $activeTimesheet = $timesheetService->getActiveTimesheet();
-        $activePause = $timesheetService->getActivePause();
+        $config = config('timesheet.actions');
 
         return [
             Actions\Action::make('startWork')
-                ->label('Iniciar trabajo')
-                ->visible(!$activeTimesheet && !$activePause)
+                ->label($config['start']['label'])
+                ->visible($timesheetService->canStartWork())
                 ->requiresConfirmation()
-                ->icon('heroicon-o-play')
-                ->action(fn () => $timesheetService->startWork()),
-
-            Actions\Action::make('pauseWork')
-                ->label('Pausar trabajo')
-                ->visible($activeTimesheet && !$activePause)
-                ->requiresConfirmation()
-                ->icon('heroicon-o-pause')
-                ->color('warning')
-                ->action(fn () => $timesheetService->pauseWork()),
-
-            Actions\Action::make('resumeWork')
-                ->label('Reanudar trabajo')
-                ->visible(!$activeTimesheet && $activePause)
-                ->requiresConfirmation()
+                ->modalHeading($config['start']['heading'])
+                ->modalDescription($config['start']['description'])
                 ->icon('heroicon-o-play')
                 ->color('success')
-                ->action(fn () => $timesheetService->resumeWork()),
+                ->action(fn() => $timesheetService->startWork()),
+
+            Actions\Action::make('pauseWork')
+                ->label($config['pause']['label'])
+                ->visible($timesheetService->canPause())
+                ->requiresConfirmation()
+                ->modalHeading($config['pause']['heading'])
+                ->modalDescription($config['pause']['description'])
+                ->icon('heroicon-o-pause')
+                ->color('warning')
+                ->action(fn() => $timesheetService->pauseWork()),
+
+            Actions\Action::make('resumeWork')
+                ->label($config['resume']['label'])
+                ->visible($timesheetService->canResume())
+                ->requiresConfirmation()
+                ->modalHeading($config['resume']['heading'])
+                ->modalDescription($config['resume']['description'])
+                ->icon('heroicon-o-play')
+                ->color('success')
+                ->action(fn() => $timesheetService->resumeWork()),
+
+            Actions\Action::make('stopWork')
+                ->label($config['stop']['label'])
+                ->visible($timesheetService->canStop())
+                ->requiresConfirmation()
+                ->modalHeading($config['stop']['heading'])
+                ->modalDescription($config['stop']['description'])
+                ->icon('heroicon-o-stop')
+                ->color('danger')
+                ->action(fn() => $timesheetService->stopWork()),
 
             Actions\CreateAction::make(),
         ];

@@ -8,23 +8,44 @@ use Illuminate\Support\Facades\Auth;
 
 class TimesheetService
 {
+    public function canStartWork(): bool
+    {
+        return !$this->getActiveTimesheet() && !$this->getActivePause();
+    }
+
+    public function canPause(): bool
+    {
+        return $this->getActiveTimesheet() !== null && !$this->getActivePause();
+    }
+
+    public function canResume(): bool
+    {
+        return $this->getActivePause() !== null;
+    }
+
+    public function canStop(): bool
+    {
+        return $this->getActiveTimesheet() !== null;
+    }
+
     public function startWork(): void
     {
-        Timesheet::create([
-            'user_id' => Auth::user()->id,
-            'calendar_id' => 1,
-            'type' => 'work',
-            'day_in' => now(),
-        ]);
+        if ($this->canStartWork()) {
+            Timesheet::create([
+                'user_id' => Auth::user()->id,
+                'calendar_id' => 1,
+                'type' => 'work',
+                'day_in' => now(),
+            ]);
+        }
     }
 
     public function pauseWork(): void
     {
-        $activeTimesheet = $this->getActiveTimesheet();
-        if ($activeTimesheet) {
+        if ($this->canPause()) {
+            $activeTimesheet = $this->getActiveTimesheet();
             $activeTimesheet->update(['day_out' => now()]);
             
-            // Crear registro de pausa
             Timesheet::create([
                 'user_id' => Auth::user()->id,
                 'calendar_id' => 1,
@@ -36,11 +57,10 @@ class TimesheetService
 
     public function resumeWork(): void
     {
-        $activePause = $this->getActivePause();
-        if ($activePause) {
+        if ($this->canResume()) {
+            $activePause = $this->getActivePause();
             $activePause->update(['day_out' => now()]);
             
-            // Crear nuevo registro de trabajo
             Timesheet::create([
                 'user_id' => Auth::user()->id,
                 'calendar_id' => 1,
@@ -48,6 +68,31 @@ class TimesheetService
                 'day_in' => now(),
             ]);
         }
+    }
+
+    public function stopWork(): void
+    {
+        $activeTimesheet = $this->getActiveTimesheet();
+        if ($activeTimesheet) {
+            $activeTimesheet->update(['day_out' => now()]);
+        }
+
+        // Si hay una pausa activa, también la detenemos
+        $activePause = $this->getActivePause();
+        if ($activePause) {
+            $activePause->update(['day_out' => now()]);
+        }
+    }
+
+    public function getStatus(): string
+    {
+        if ($this->getActiveTimesheet()) {
+            return 'working';
+        }
+        if ($this->getActivePause()) {
+            return 'paused';
+        }
+        return 'stopped';
     }
 
     public function getActiveTimesheet(): ?Timesheet

@@ -14,33 +14,36 @@ class PersonalWidgetStats extends BaseWidget
 {
     protected function getStats(): array
     {
-        $totalPendingHolidays = Holiday::where('type', 'pending')
-            ->where('user_id', Auth::user()->id)
-            ->count();
-        $totalApprovedHolidays = Holiday::where('type', 'approved')
-            ->where('user_id', Auth::user()->id)
-            ->count();
-
         $timesheetService = new TimesheetService();
-        $hoursWorkedToday = $timesheetService->calculateHoursWorkedToday();
-        $pauseTimeToday = $timesheetService->calculateTotalPauseToday();
-        
-        $activeTimesheet = $timesheetService->getActiveTimesheet();
-        $activePause = $timesheetService->getActivePause();
+        $status = $timesheetService->getStatus();
+        $statusConfig = config('timesheet.status');
 
         return [
-            Stat::make('Total Pending Holidays', $totalPendingHolidays)
-                ->icon('heroicon-o-clock'),
-            Stat::make('Total Approved Holidays', $totalApprovedHolidays)
-                ->icon('heroicon-o-clock'),
-            Stat::make('Hours Worked Today', $hoursWorkedToday)
-                ->description($activeTimesheet ? 'Currently working' : ($activePause ? 'On break' : 'Not working'))
-                ->descriptionIcon($activeTimesheet ? 'heroicon-o-play' : ($activePause ? 'heroicon-o-pause' : 'heroicon-o-stop'))
-                ->color($activeTimesheet ? 'success' : ($activePause ? 'warning' : 'danger')),
-            Stat::make('Total Pause Time', $pauseTimeToday)
-                ->description($activePause ? 'Currently on break' : 'Total pauses today')
-                ->descriptionIcon('heroicon-o-clock')
-                ->color($activePause ? 'warning' : 'info'),
+            Stat::make('Current Status', $statusConfig[$status]['description'])
+                ->icon($statusConfig[$status]['icon'])
+                ->color($statusConfig[$status]['color']),
+
+            Stat::make('Hours Worked Today', $timesheetService->calculateHoursWorkedToday())
+                ->description('Total work time')
+                ->icon('heroicon-o-clock')
+                ->color('success'),
+
+            Stat::make('Break Time Today', $timesheetService->calculateTotalPauseToday())
+                ->description('Total break time')
+                ->icon('heroicon-o-clock')
+                ->color($status === 'paused' ? 'warning' : 'info'),
+
+            Stat::make('Pending Holidays', Holiday::where('type', 'pending')
+                ->where('user_id', Auth::user()->id)
+                ->count())
+                ->icon('heroicon-o-calendar')
+                ->color('warning'),
+
+            Stat::make('Approved Holidays', Holiday::where('type', 'approved')
+                ->where('user_id', Auth::user()->id)
+                ->count())
+                ->icon('heroicon-o-calendar-days')
+                ->color('success'),
         ];
     }
 }
