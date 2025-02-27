@@ -106,41 +106,12 @@ class CountryResource extends Resource
                 Tables\Columns\TextColumn::make('iso3')
                     ->label(__('filament.tables.country.iso3'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('numeric_code')
-                    ->label(__('filament.tables.country.numeric_code'))
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('phonecode')
                     ->label(__('filament.tables.country.phonecode'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('capital')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('currency')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('currency_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('currency_symbol')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tld')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('native')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('region')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('subregion')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('emoji')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('emojiU')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('flag')
                     ->label(__('filament.tables.country.flag'))
-                    ->boolean(),
+                    ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->label(__('filament.tables.country.is_active'))
                     ->boolean(),
@@ -151,11 +122,6 @@ class CountryResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label(__('filament.tables.country.updated_at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->label(__('filament.tables.country.deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
