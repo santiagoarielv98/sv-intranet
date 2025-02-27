@@ -33,8 +33,8 @@ SV Intranet es una aplicación web desarrollada con Laravel y Filament que tiene
 
 #### 🔹 Gestión de Vacaciones y Permisos
 - Solicitud y aprobación de vacaciones.
-- Control de días disponibles por empleado.
-- Registro de ausencias justificadas o no.
+<!-- - Control de días disponibles por empleado. -->
+<!-- - Registro de ausencias justificadas o no. -->
 
 #### 🔹 Autenticación y Roles
 - Inicio de sesión y registro de usuarios.

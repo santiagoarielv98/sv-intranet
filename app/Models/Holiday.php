@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 #[ObservedBy(HolidayObserver::class)]
 class Holiday extends Model
 {
+    //
+    use HasFactory;
 
     protected $fillable = [
         'calendar_id',
@@ -18,8 +20,6 @@ class Holiday extends Model
         'day',
         'type',
     ];
-    //
-    use HasFactory;
 
     /**
      * Get the user that owns the Holiday
