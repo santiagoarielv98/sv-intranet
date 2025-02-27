@@ -3,6 +3,7 @@
 namespace App\Filament\Personal\Resources\TimesheetResource\Pages;
 
 use App\Filament\Personal\Resources\TimesheetResource;
+use App\Models\Calendar;
 use App\Services\TimesheetService;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -15,6 +16,10 @@ class ListTimesheets extends ListRecords
     {
         $timesheetService = new TimesheetService();
         $config = config('timesheet.actions');
+
+        if (Calendar::where('active', true)->orderBy('created_at', 'desc')->first() === null) {
+            return [];
+        }
 
         return [
             Actions\Action::make('startWork')

@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Timesheet;
+use App\Models\Calendar;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,12 +29,17 @@ class TimesheetService
         return $this->getActiveTimesheet() !== null;
     }
 
+    public function getActiveCalendar(): ?Calendar
+    {
+        return Calendar::where('active', true)->orderBy('created_at', 'desc')->first();
+    }
+
     public function startWork(): void
     {
         if ($this->canStartWork()) {
             Timesheet::create([
                 'user_id' => Auth::user()->id,
-                'calendar_id' => 1,
+                'calendar_id' => $this->getActiveCalendar()->id,
                 'type' => 'work',
                 'day_in' => now(),
             ]);
@@ -48,7 +54,7 @@ class TimesheetService
             
             Timesheet::create([
                 'user_id' => Auth::user()->id,
-                'calendar_id' => 1,
+                'calendar_id' => $this->getActiveCalendar()->id,
                 'type' => 'pause',
                 'day_in' => now(),
             ]);
@@ -63,7 +69,7 @@ class TimesheetService
             
             Timesheet::create([
                 'user_id' => Auth::user()->id,
-                'calendar_id' => 1,
+                'calendar_id' => $this->getActiveCalendar()->id,
                 'type' => 'work',
                 'day_in' => now(),
             ]);

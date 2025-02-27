@@ -83,11 +83,12 @@ class HolidayResource extends Resource
                 Tables\Columns\TextColumn::make('type')
                     ->label(__('filament.tables.holiday.type'))
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'decline' => 'danger',
                         'approved' => 'success',
                         'pending' => 'warning',
                     })
+                    ->formatStateUsing(fn(string $state): string => __('filament.enums.status.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('filament.tables.holiday.created_at'))
