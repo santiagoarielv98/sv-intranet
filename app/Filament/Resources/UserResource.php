@@ -35,7 +35,7 @@ class UserResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('filament.navigation.groups.employees-management');
+        return __('filament.navigation.groups.system-management');
     }
 
     public static function getNavigationBadge(): ?string
@@ -76,52 +76,46 @@ class UserResource extends Resource
                             ->multiple()
                             ->preload()
                             ->searchable(),
-                        Forms\Components\Select::make('departments')
-                            ->label(__('filament.common.fields.departments'))
-                            ->relationship('departments', 'name')
-                            ->multiple()
-                            ->preload()
-                            ->searchable(),
                     ])),
-                Forms\Components\Section::make(__('filament.common.sections.address-information'))
-                    ->columns(3)
-                    ->schema(([
-                        Forms\Components\Select::make('country_id')
-                            ->label(__('filament.common.fields.country'))
-                            ->relationship('country', 'name')
-                            ->searchable()
-                            ->preload()
-                            ->live()
-                            ->afterStateUpdated(function (Set $set) {
-                                $set('state_id', null);
-                                $set('city_id', null);
-                            })
-                            ->required(),
-                        Forms\Components\Select::make('state_id')
-                            ->label(__('filament.common.fields.state'))
-                            ->options(fn(Get $get): Collection => State::query()
-                                ->where('country_id', $get('country_id'))
-                                ->pluck('name', 'id'))
-                            ->searchable()
-                            ->preload()
-                            ->live()
-                            ->afterStateUpdated(fn(Set $set) => $set('city_id', null))
-                            ->required(),
-                        Forms\Components\Select::make('city_id')
-                            ->label(__('filament.common.fields.city'))
-                            ->options(fn(Get $get): Collection => City::query()
-                                ->where('state_id', $get('state_id'))
-                                ->pluck('name', 'id'))
-                            ->searchable()
-                            ->preload()
-                            ->required(),
-                        Forms\Components\TextInput::make('address')
-                            ->label(__('filament.common.fields.address'))
-                            ->required(),
-                        Forms\Components\TextInput::make('postal_code')
-                            ->label(__('filament.common.fields.postal_code'))
-                            ->required(),
-                    ])),
+                // Forms\Components\Section::make(__('filament.common.sections.address-information'))
+                //     ->columns(3)
+                //     ->schema(([
+                //         Forms\Components\Select::make('country_id')
+                //             ->label(__('filament.common.fields.country'))
+                //             ->relationship('country', 'name')
+                //             ->searchable()
+                //             ->preload()
+                //             ->live()
+                //             ->afterStateUpdated(function (Set $set) {
+                //                 $set('state_id', null);
+                //                 $set('city_id', null);
+                //             })
+                //             ->required(),
+                //         Forms\Components\Select::make('state_id')
+                //             ->label(__('filament.common.fields.state'))
+                //             ->options(fn(Get $get): Collection => State::query()
+                //                 ->where('country_id', $get('country_id'))
+                //                 ->pluck('name', 'id'))
+                //             ->searchable()
+                //             ->preload()
+                //             ->live()
+                //             ->afterStateUpdated(fn(Set $set) => $set('city_id', null))
+                //             ->required(),
+                //         Forms\Components\Select::make('city_id')
+                //             ->label(__('filament.common.fields.city'))
+                //             ->options(fn(Get $get): Collection => City::query()
+                //                 ->where('state_id', $get('state_id'))
+                //                 ->pluck('name', 'id'))
+                //             ->searchable()
+                //             ->preload()
+                //             ->required(),
+                //         Forms\Components\TextInput::make('address')
+                //             ->label(__('filament.common.fields.address'))
+                //             ->required(),
+                //         Forms\Components\TextInput::make('postal_code')
+                //             ->label(__('filament.common.fields.postal_code'))
+                //             ->required(),
+                //     ])),
             ]);
     }
 
@@ -139,21 +133,30 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email')
                     ->label(__('filament.common.fields.email'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->label(__('filament.common.fields.address'))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('postal_code')
-                    ->label(__('filament.common.fields.postal_code'))
-                    ->sortable()
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('departments.name')
+                // Tables\Columns\TextColumn::make('address')
+                //     ->label(__('filament.common.fields.address'))
+                //     ->sortable()
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('postal_code')
+                //     ->label(__('filament.common.fields.postal_code'))
+                //     ->sortable()
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('departments.name')
+                //     ->badge()
+                //     ->label(__('filament.common.fields.departments'))
+                //     ->searchable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('roles.name')
                     ->badge()
-                    ->label(__('filament.common.fields.departments'))
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->color(fn(string $state): string => match ($state) {
+                        'super_admin' => 'primary',
+                        'panel_user' => 'success',
+                        default => 'secondary',
+                    })
+                    ->label(__('filament.common.fields.roles'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->label(__('filament.common.fields.email_verified_at'))
                     ->dateTime()

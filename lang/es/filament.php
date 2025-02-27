@@ -10,6 +10,10 @@ return [
     
     'resources' => [
         'users' => [
+            'label' => 'Usuario',
+            'plural_label' => 'Usuarios',
+        ],
+        'employees' => [
             'label' => 'Empleado',
             'plural_label' => 'Empleados',
         ],

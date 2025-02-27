@@ -30,11 +30,6 @@ class User extends Authenticatable implements FilamentUser
         'name',
         'email',
         'password',
-        'country_id',
-        'state_id',
-        'city_id',
-        'address',
-        'postal_code',
     ];
 
     /**
@@ -74,72 +69,73 @@ class User extends Authenticatable implements FilamentUser
     }
 
 
-    /**
-     * Get the country that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(Country::class);
-    }
+    // /**
+    //  * Get the country that owns the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function country(): BelongsTo
+    // {
+    //     return $this->belongsTo(Country::class);
+    // }
 
-    /**
-     * Get the state that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function state(): BelongsTo
-    {
-        return $this->belongsTo(State::class);
-    }
+    // /**
+    //  * Get the state that owns the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function state(): BelongsTo
+    // {
+    //     return $this->belongsTo(State::class);
+    // }
 
-    /**
-     * Get the city that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function city(): BelongsTo
-    {
-        return $this->belongsTo(City::class);
-    }
-    /**
-     * The calendars that belong to the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function calendars(): BelongsToMany
-    {
-        return $this->belongsToMany(Calendar::class);
-    }
+    // /**
+    //  * Get the city that owns the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //  */
+    // public function city(): BelongsTo
+    // {
+    //     return $this->belongsTo(City::class);
+    // }
 
-    /**
-     * The departments that belong to the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function departments(): BelongsToMany
-    {
-        return $this->belongsToMany(Department::class, 'user_department');
-    }
+    // /**
+    //  * The calendars that belong to the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    //  */
+    // public function calendars(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Calendar::class);
+    // }
 
-    /**
-     * Get all of the holidays for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function holidays(): HasMany
-    {
-        return $this->hasMany(Holiday::class);
-    }
+    // /**
+    //  * The departments that belong to the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    //  */
+    // public function departments(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Department::class, 'user_department');
+    // }
 
-    /**
-     * Get all of the timesheets for the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function timesheets(): HasMany
-    {
-        return $this->hasMany(Timesheet::class);
-    }
+    // /**
+    //  * Get all of the holidays for the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function holidays(): HasMany
+    // {
+    //     return $this->hasMany(Holiday::class);
+    // }
+
+    // /**
+    //  * Get all of the timesheets for the User
+    //  *
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasMany
+    //  */
+    // public function timesheets(): HasMany
+    // {
+    //     return $this->hasMany(Timesheet::class);
+    // }
 }
