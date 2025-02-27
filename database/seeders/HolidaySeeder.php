@@ -21,7 +21,6 @@ class HolidaySeeder extends Seeder
 
         $holidays = [
             [
-                'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
                 'day' => '2022-01-01'
             ],
