@@ -63,6 +63,10 @@ return [
             'year' => 'Year',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'user' => 'User',
+            'calendar' => 'Calendar',
+            'day_in' => 'Day In',
+            'day_out' => 'Day Out',
         ],
         'sections' => [
             'personal-information' => 'Personal Information',

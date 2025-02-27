@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\HolidayExporter;
 use App\Filament\Resources\HolidayResource\Pages;
 use App\Filament\Resources\HolidayResource\RelationManagers;
 use App\Models\Holiday;
@@ -78,6 +79,10 @@ class HolidayResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\ExportAction::make()
+                    ->exporter(HolidayExporter::class)
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
                     ->label(__('filament.tables.holiday.calendar'))
@@ -132,6 +137,9 @@ class HolidayResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+                Tables\Actions\ExportBulkAction::make()
+                    ->exporter(HolidayExporter::class)
+
             ])->defaultSort('created_at', 'desc');
     }
 
