@@ -43,4 +43,9 @@ class TimesheetExporter extends Exporter
 
         return $body;
     }
+
+    public function getFileName(Export $export): string
+    {
+        return 'timesheets-' . now()->format('Y-m-d-H-i-s') . '.csv';
+    }
 }

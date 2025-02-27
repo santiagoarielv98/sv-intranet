@@ -44,7 +44,6 @@ class UserExporter extends Exporter
         return 'users-' . now()->format('Y-m-d-H-i-s') . '.csv';
     }
 
-
     public static function getCompletedNotificationBody(Export $export): string
     {
         $body = 'Your user export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
