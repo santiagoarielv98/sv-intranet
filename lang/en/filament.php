@@ -282,4 +282,20 @@ return [
             ],
         ],
     ],
+    'notifications' => [
+        'holiday' => [
+            'requested' => [
+                'title' => 'New holiday request',
+                'body' => ':name has requested a holiday',
+            ],
+            'approved' => [
+                'title' => 'Holiday request approved',
+                'body' => 'Your holiday request has been approved',
+            ],
+            'decline' => [
+                'title' => 'Holiday request declined',
+                'body' => 'Your holiday request has been declined',
+            ],
+        ],
+    ],
 ];

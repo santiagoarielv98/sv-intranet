@@ -28,20 +28,20 @@ class HolidayObserver
         } elseif ($holiday->isDirty('type') && $holiday->type === 'approved') {
             Notification::make()
                 ->success()
-                ->title('Holiday request approved')
-                ->body("Your holiday request has been approved")
-                ->sendTo($holiday->user);
+                ->title('filament.notifications.holiday.approved.title')
+                ->body('filament.notifications.holiday.approved.body')
+                ->sendToDatabase($holiday->user);
         } elseif ($holiday->isDirty('type') && $holiday->type === 'decline') {
             Notification::make()
                 ->danger()
-                ->title('Holiday request declined')
-                ->body("Your holiday request has been declined")
-                ->sendTo($holiday->user);
+                ->title('filament.notifications.holiday.decline.title')
+                ->body('filament.notifications.holiday.decline.body')
+                ->sendToDatabase($holiday->user);
         }
     }
 
     /**
-     * Handle the Holiday "deleted" event.
+     * Handle the Holiday "deleted" event.  
      */
     public function deleted(Holiday $holiday): void
     {
@@ -73,8 +73,8 @@ class HolidayObserver
     {
         Notification::make()
             ->info()
-            ->title('New holiday request')
-            ->body("{$holiday->user->name} has requested a holiday")
+            ->title('filament.notifications.holiday.requested.title')
+            ->body($holiday->user->name)
             ->sendToDatabase(User::role('super_admin')->get());
     }
 }

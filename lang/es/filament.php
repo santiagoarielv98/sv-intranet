@@ -282,4 +282,20 @@ return [
         'holidays' => 'Vacaciones',
         'timesheets' => 'Registros de Tiempo',
     ],
+    'notifications' => [
+        'holiday' => [
+            'requested' => [
+                'title' => 'Nueva solicitud de vacaciones',
+                'body' => ':name ha solicitado unas vacaciones',
+            ],
+            'approved' => [
+                'title' => 'Solicitud de vacaciones aprobada',
+                'body' => 'Tu solicitud de vacaciones ha sido aprobada',
+            ],
+            'decline' => [
+                'title' => 'Solicitud de vacaciones rechazada',
+                'body' => 'Tu solicitud de vacaciones ha sido rechazada',
+            ],
+        ],
+    ],
 ];
