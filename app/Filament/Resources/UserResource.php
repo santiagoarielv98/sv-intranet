@@ -66,6 +66,12 @@ class UserResource extends Resource
                             ->multiple()
                             ->preload()
                             ->searchable(),
+                        Forms\Components\Select::make('departments')
+                            ->label(__('filament.common.fields.departments'))
+                            ->relationship('departments', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
                     ])),
                 Forms\Components\Section::make(__('filament.common.sections.address-information'))
                     ->columns(3)
@@ -127,6 +133,11 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('postal_code')
                     ->label(__('filament.common.fields.postal_code'))
                     ->sortable()
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('departments.name')
+                    ->badge()
+                    ->label(__('filament.common.fields.departments'))
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('email_verified_at')

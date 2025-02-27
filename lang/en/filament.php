@@ -48,6 +48,7 @@ return [
             'name' => 'Name',
             'email' => 'Email',
             'email_verified_at' => 'Email Verified',
+            'departments' => 'Departments',
             'password' => 'Password',
             'roles' => 'Roles',
             'country' => 'Country',

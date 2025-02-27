@@ -17,7 +17,6 @@ SV Intranet es una aplicación web desarrollada con Laravel y Filament que tiene
 - Gestión de departamentos
 - Gestión de vacaciones
 - Registro y seguimiento de horarios de trabajo
-- Integración con APIs externas
 - Optimización de rendimiento
 - Gestión de roles y permisos
 
