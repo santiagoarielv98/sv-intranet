@@ -9,6 +9,37 @@
 ## 📋 Descripción
 SV Intranet es una aplicación web desarrollada con Laravel y Filament que tiene como objetivo gestionar y optimizar los procesos internos de una organización. La aplicación permite a los usuarios gestionar empleados, departamentos, vacaciones, horarios de trabajo, y más.
 
+## 🎯 MVP
+- Gestión de usuarios
+- Gestión de departamentos
+- Gestión de vacaciones
+- Registro de horarios de trabajo
+
+## MVP - Aplicación de Gestión de Empleados
+### 1. Módulos Principales
+#### 🔹 Gestión de Empleados
+- Crear, editar y eliminar empleados.
+- Asignar empleados a departamentos.
+- Registrar información básica (nombre, email, teléfono, puesto, fecha de ingreso).
+
+#### 🔹 Gestión de Departamentos
+- Crear, editar y eliminar departamentos.
+- Listar empleados por departamento.
+
+#### 🔹 Gestión de Horarios de Trabajo
+- Asignar horarios de trabajo a empleados.
+- Registrar y modificar turnos (mañana, tarde, noche).
+- Gestionar horas extras.
+
+#### 🔹 Gestión de Vacaciones y Permisos
+- Solicitud y aprobación de vacaciones.
+- Control de días disponibles por empleado.
+- Registro de ausencias justificadas o no.
+
+#### 🔹 Autenticación y Roles
+- Inicio de sesión y registro de usuarios.
+- Roles de usuario: Administrador (gestiona todo) y Empleado (solo visualiza su información y solicita permisos).
+
 <!-- ## 🖼️ Capturas de Pantalla
 ![Vista Previa](/ruta/a/tu/imagen.png) -->
 
@@ -70,34 +101,3 @@ Enlace al proyecto: [https://github.com/santiagoariel/sv-intranet](https://githu
 - Notificaciones en tiempo real
 - Integración con servicios de terceros
 - Soporte multilenguaje
-
-## 🎯 MVP
-- Gestión de usuarios
-- Gestión de departamentos
-- Gestión de vacaciones
-- Registro de horarios de trabajo
-
-## MVP - Aplicación de Gestión de Empleados
-### 1. Módulos Principales
-#### 🔹 Gestión de Empleados
-- Crear, editar y eliminar empleados.
-- Asignar empleados a departamentos.
-- Registrar información básica (nombre, email, teléfono, puesto, fecha de ingreso).
-
-#### 🔹 Gestión de Departamentos
-- Crear, editar y eliminar departamentos.
-- Listar empleados por departamento.
-
-#### 🔹 Gestión de Horarios de Trabajo
-- Asignar horarios de trabajo a empleados.
-- Registrar y modificar turnos (mañana, tarde, noche).
-- Gestionar horas extras.
-
-#### 🔹 Gestión de Vacaciones y Permisos
-- Solicitud y aprobación de vacaciones.
-- Control de días disponibles por empleado.
-- Registro de ausencias justificadas o no.
-
-#### 🔹 Autenticación y Roles
-- Inicio de sesión y registro de usuarios.
-- Roles de usuario: Administrador (gestiona todo) y Empleado (solo visualiza su información y solicita permisos).

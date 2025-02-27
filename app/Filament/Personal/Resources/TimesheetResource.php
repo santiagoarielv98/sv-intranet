@@ -116,14 +116,9 @@ class TimesheetResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    ExportBulkAction::make()->exports([
-                        ExcelExport::make('table')->fromTable()
-                            ->withFilename('Timesheets_' . date('Y-m-d') . '_export'),
-                        ExcelExport::make('form')->fromForm(),
-                    ]),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
