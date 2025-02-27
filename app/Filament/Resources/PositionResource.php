@@ -17,18 +17,36 @@ class PositionResource extends Resource
 {
     protected static ?string $model = Position::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+
+    public static function getLabel(): string
+    {
+        return __('filament.resources.positions.label');
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('filament.resources.positions.plural_label');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('filament.navigation.groups.employees-management');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
+                    ->label(__('filament.common.fields.title'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('department_id')
+                    ->label(__('filament.common.fields.department'))
                     ->numeric(),
                 Forms\Components\Textarea::make('description')
+                    ->label(__('filament.common.fields.description'))
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -39,15 +57,19 @@ class PositionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label(__('filament.common.fields.title'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('department_id')
+                    ->label(__('filament.common.fields.department'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(__('filament.common.fields.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(__('filament.common.fields.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

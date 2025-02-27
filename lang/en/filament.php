@@ -13,6 +13,10 @@ return [
             'label' => 'User',
             'plural_label' => 'Users',
         ],
+        'positions' => [
+            'label' => 'Position',
+            'plural_label' => 'Positions',
+        ],
         'employees' => [
             'label' => 'Employee',
             'plural_label' => 'Employees',
@@ -54,6 +58,7 @@ return [
             'email' => 'Email',
             'email_verified_at' => 'Email Verified',
             'employee' => 'Employee',
+            'department' => 'Department',
             'departments' => 'Departments',
             'password' => 'Password',
             'roles' => 'Roles',
