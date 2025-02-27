@@ -23,67 +23,57 @@ class HolidaySeeder extends Seeder
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-01-01',
-                'type' => 'Public',
+                'day' => '2022-01-01'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-01-06',
-                'type' => 'Public',
+                'day' => '2022-01-06'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-04-15',
-                'type' => 'Public',
+                'day' => '2022-04-15'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-04-18',
-                'type' => 'Public',
+                'day' => '2022-04-18'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-05-01',
-                'type' => 'Public',
+                'day' => '2022-05-01'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-06-24',
-                'type' => 'Public',
+                'day' => '2022-06-24'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-09-08',
-                'type' => 'Public',
+                'day' => '2022-09-08'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-10-12',
-                'type' => 'Public',
+                'day' => '2022-10-12'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-11-01',
-                'type' => 'Public',
+                'day' => '2022-11-01'
             ],
             [
                 'calendar_id' => $lastCalendar->id,
                 'user_id' => $nonSuperAdmin->random()->id,
-                'day' => '2022-12-06',
-                'type' => 'Public',
+                'day' => '2022-12-06'
             ],
         ];
 
         foreach ($holidays as $holiday) {
-            Holiday::create($holiday);
+            Holiday::factory()->create($holiday);
         }
 
     }

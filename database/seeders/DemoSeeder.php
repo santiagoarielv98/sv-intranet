@@ -17,22 +17,28 @@ class DemoSeeder extends Seeder
     {
         $this->call([
             ShieldSeeder::class,
-            DepartmentSeeder::class,
+            WorldTableSeeder::class,
         ]);
 
-        $demo =User::factory()->create([
+        $address = [
+            'country_id' => 11, // Argentina
+            'state_id' => 3656, // Buenos Aires
+            'city_id' => 704, // Buenos Aires
+            'address' => 'Av. Corrientes 1234',
+            'postal_code' => '1043',
+        ];
+
+        User::factory()->create([
             'name' => 'Demo User',
             'email' => 'demo@example.com',
-        ]);
+            ...$address,
+        ])->assignRole('panel_user');
 
-        $demo->assignRole('panel_user');
-
-        $admin = User::factory()->create([
+        User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@example.com',
-        ]);
-
-        $admin->assignRole('super_admin');
+            ...$address,
+        ])->assignRole('super_admin');
 
         User::factory(10)->create();
 
@@ -44,6 +50,8 @@ class DemoSeeder extends Seeder
 
         $this->call([
             HolidaySeeder::class,
+            DepartmentSeeder::class,
+            TimesheetSeeder::class,
         ]);
     }
 }
