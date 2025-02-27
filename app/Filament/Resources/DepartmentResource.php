@@ -42,17 +42,17 @@ class DepartmentResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label(__('filament.forms.department.name'))
                     ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->label(__('filament.forms.department.description')),
-                Forms\Components\Select::make('manager_id')
-                    ->relationship('manager', 'name')
-                    ->label(__('filament.forms.department.manager')),
-                Forms\Components\Select::make('parent_id')
-                    ->relationship('parent', 'name')
-                    ->label(__('filament.forms.department.parent')),
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('filament.forms.department.is_active'))
-                    ->required(),
+                // Forms\Components\Textarea::make('description')
+                //     ->label(__('filament.forms.department.description')),
+                // Forms\Components\Select::make('manager_id')
+                //     ->relationship('manager', 'name')
+                //     ->label(__('filament.forms.department.manager')),
+                // Forms\Components\Select::make('parent_id')
+                //     ->relationship('parent', 'name')
+                //     ->label(__('filament.forms.department.parent')),
+                // Forms\Components\Toggle::make('is_active')
+                //     ->label(__('filament.forms.department.is_active'))
+                //     ->required(),
             ]);
     }
 
@@ -63,18 +63,9 @@ class DepartmentResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('filament.tables.department.name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('description')
-                    ->label(__('filament.tables.department.description'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('manager.name')
-                    ->label(__('filament.tables.department.manager'))
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('parent.name')
-                    ->label(__('filament.tables.department.parent'))
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('is_active')
-                    ->label(__('filament.tables.department.is_active'))
-                    ->boolean(),
+                // Tables\Columns\TextColumn::make('description')
+                //     ->label(__('filament.tables.department.description'))
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(__('filament.tables.department.created_at'))
                     ->dateTime()
@@ -85,11 +76,11 @@ class DepartmentResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->label(__('filament.tables.department.deleted_at'))
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                // Tables\Columns\TextColumn::make('deleted_at')
+                //     ->label(__('filament.tables.department.deleted_at'))
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
