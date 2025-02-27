@@ -67,6 +67,7 @@ return [
             'calendar' => 'Calendario',
             'day_in' => 'Entrada',
             'day_out' => 'Salida',
+            'users_count' => 'Cantidad de Usuarios',
         ],
         'sections' => [
             'personal-information' => 'Información Personal',

@@ -67,6 +67,7 @@ return [
             'calendar' => 'Calendar',
             'day_in' => 'Day In',
             'day_out' => 'Day Out',
+            'users_count' => 'Users Count',
         ],
         'sections' => [
             'personal-information' => 'Personal Information',

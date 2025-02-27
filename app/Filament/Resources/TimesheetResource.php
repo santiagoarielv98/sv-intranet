@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\TimesheetExporter;
 use App\Filament\Resources\TimesheetResource\Pages;
 use App\Filament\Resources\TimesheetResource\RelationManagers;
 use App\Models\Timesheet;
@@ -65,6 +66,10 @@ class TimesheetResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->headerActions([
+                Tables\Actions\ExportAction::make()
+                    ->exporter(TimesheetExporter::class)
+            ])
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
                     ->label(__('filament.tables.timesheet.calendar'))
@@ -122,6 +127,8 @@ class TimesheetResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ExportBulkAction::make()
+                        ->exporter(TimesheetExporter::class)
                 ]),
             ])
             ->defaultSort('created_at', 'desc');
