@@ -266,4 +266,19 @@ return [
             ],
         ],
     ],
+
+    'personal_widget_stats' => [
+        'current_status' => 'Estado Actual',
+        'hours_worked_today' => 'Horas Trabajadas Hoy',
+        'total_work_time' => 'Tiempo Total de Trabajo',
+        'break_time_today' => 'Tiempo de Descanso Hoy',
+        'total_break_time' => 'Tiempo Total de Descanso',
+        'pending_holidays' => 'Vacaciones Pendientes',
+        'approved_holidays' => 'Vacaciones Aprobadas',
+    ],
+    'stats_overview' => [
+        'employees' => 'Empleados',
+        'holidays' => 'Vacaciones',
+        'timesheets' => 'Registros de Tiempo',
+    ],
 ];

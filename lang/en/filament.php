@@ -237,6 +237,21 @@ return [
         ],
     ],
 
+    'personal_widget_stats' => [
+        'current_status' => 'Current Status',
+        'hours_worked_today' => 'Hours Worked Today',
+        'total_work_time' => 'Total Work Time',
+        'break_time_today' => 'Break Time Today',
+        'total_break_time' => 'Total Break Time',
+        'pending_holidays' => 'Pending Holidays',
+        'approved_holidays' => 'Approved Holidays',
+    ],
+    'stats_overview' => [
+        'employees' => 'Employees',
+        'holidays' => 'Holidays',
+        'timesheets' => 'Timesheets',
+    ],
+
     'timesheet' => [
         'status' => [
             'working' => 'Working',
