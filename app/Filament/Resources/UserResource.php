@@ -39,6 +39,17 @@ class UserResource extends Resource
         return __('filament.navigation.groups.employees-management');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return __('filament.badge_tooltip.users');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -166,7 +177,7 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

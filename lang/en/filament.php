@@ -298,4 +298,8 @@ return [
             ],
         ],
     ],
+    'badge_tooltip' => [
+        'holidays' => 'Number of pending holidays',
+        'users' => 'Number of employees',
+    ],
 ];

@@ -35,6 +35,19 @@ class HolidayResource extends Resource
         return __('filament.navigation.groups.employees-management');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('type', 'pending')->count();
+    }
+
+    public static function getNavigationBadgeTooltip(): ?string
+    {
+        return __('filament.badge_tooltip.holidays');
+    }
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'warning';
+    }
 
     public static function form(Form $form): Form
     {
@@ -111,13 +124,15 @@ class HolidayResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

@@ -298,4 +298,8 @@ return [
             ],
         ],
     ],
+    'badge_tooltip' => [
+        'holidays' => 'Cantidad de vacaciones pendientes',
+        'users' => 'Cantidad de empleados',
+    ],
 ];
