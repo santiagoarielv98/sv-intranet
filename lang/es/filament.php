@@ -45,6 +45,7 @@ return [
 
     'common' => [
         'fields' => [
+            'id' => 'ID',
             'name' => 'Nombre',
             'email' => 'Correo Electrónico',
             'email_verified_at' => 'Correo Electrónico Verificado',
