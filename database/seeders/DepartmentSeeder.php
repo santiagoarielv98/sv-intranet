@@ -35,9 +35,10 @@ class DepartmentSeeder extends Seeder
         ]);
 
         $nonSuperAdmin = User::withoutRole('super_admin')->get();
+        $departments = Department::all();
 
-        Department::all()->each(function (Department $department) use ($nonSuperAdmin) {
-            $department->users()->attach($nonSuperAdmin->random());
-        });
+        foreach ($nonSuperAdmin as $user) {
+            $user->departments()->attach($departments->random()->id);
+        }
     }
 }
