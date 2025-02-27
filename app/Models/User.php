@@ -68,6 +68,10 @@ class User extends Authenticatable implements FilamentUser
         return false;
     }
 
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
+    }
 
     // /**
     //  * Get the country that owns the User

@@ -53,6 +53,7 @@ return [
             'name' => 'Name',
             'email' => 'Email',
             'email_verified_at' => 'Email Verified',
+            'employee' => 'Employee',
             'departments' => 'Departments',
             'password' => 'Password',
             'roles' => 'Roles',
@@ -310,6 +311,7 @@ return [
     ],
     'badge_tooltip' => [
         'holidays' => 'Number of pending holidays',
-        'users' => 'Number of employees',
+        'employees' => 'Number of employees',
+        'users' => 'Number of users',
     ],
 ];

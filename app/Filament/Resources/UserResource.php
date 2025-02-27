@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Exports\UserExporter;
 use App\Filament\Resources\UserResource\Pages;
 use App\Models\City;
+use App\Models\Employee;
 use App\Models\State;
 use App\Models\User;
 use Filament\Actions\Exports\Models\Export;
@@ -15,6 +16,7 @@ use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
 class UserResource extends Resource
@@ -76,6 +78,11 @@ class UserResource extends Resource
                             ->multiple()
                             ->preload()
                             ->searchable(),
+                        Forms\Components\Select::make('employee_id')
+                            ->label(__('filament.common.fields.employee'))
+                            ->options(Employee::all()->pluck('full_name', 'id'))
+                            ->searchable()
+                            ->preload(),
                     ])),
                 // Forms\Components\Section::make(__('filament.common.sections.address-information'))
                 //     ->columns(3)
@@ -148,6 +155,10 @@ class UserResource extends Resource
                 //     ->label(__('filament.common.fields.departments'))
                 //     ->searchable()
                 //     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('employee')
+                    ->formatStateUsing(fn (User $record): View => $record->full_name)
+                    ->label(__('filament.common.fields.employee'))
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('roles.name')
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {

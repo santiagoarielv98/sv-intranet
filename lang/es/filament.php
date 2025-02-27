@@ -54,6 +54,7 @@ return [
             'email' => 'Correo Electrónico',
             'email_verified_at' => 'Correo Electrónico Verificado',
             'departments' => 'Departamentos',
+            'employee' => 'Empleado',
             'password' => 'Contraseña',
             'roles' => 'Roles',
             'country' => 'País',
@@ -310,6 +311,7 @@ return [
     ],
     'badge_tooltip' => [
         'holidays' => 'Cantidad de vacaciones pendientes',
-        'users' => 'Cantidad de empleados',
+        'employees' => 'Cantidad de empleados',
+        'users' => 'Cantidad de usuarios',
     ],
 ];

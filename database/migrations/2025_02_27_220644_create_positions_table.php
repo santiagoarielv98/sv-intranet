@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
