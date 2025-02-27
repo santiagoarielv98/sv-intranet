@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->foreignId('country_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('state_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('city_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('hire_date');
             $table->foreignId('position_id')->nullable()->constrained()->nullOnDelete();
             $table->decimal('salary', 10, 2);
