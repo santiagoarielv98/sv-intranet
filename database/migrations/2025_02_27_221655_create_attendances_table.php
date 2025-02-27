@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
+            $table->dateTime('check_in');
+            $table->dateTime('check_out')->nullable();
+            $table->string('location', 100)->nullable();
+            $table->string('ip_address', 45)->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('attendances');
     }
 };
