@@ -64,6 +64,16 @@ class Employee extends Model
         return $this->hasMany(Document::class);
     }
 
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendance::class);
+    }
+
+    public function leaveRequests(): HasMany
+    {
+        return $this->hasMany(LeaveRequest::class);
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(
