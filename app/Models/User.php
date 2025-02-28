@@ -8,6 +8,7 @@ use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -28,6 +29,7 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'employee_id',
+        'position_id',
     ];
 
     /**
@@ -56,5 +58,10 @@ class User extends Authenticatable implements FilamentUser
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function position(): BelongsTo
+    {
+        return $this->belongsTo(Position::class);
     }
 }
