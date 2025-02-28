@@ -29,7 +29,6 @@ class User extends Authenticatable implements FilamentUser
         'email',
         'password',
         'employee_id',
-        'position_id',
     ];
 
     /**
@@ -58,10 +57,5 @@ class User extends Authenticatable implements FilamentUser
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
-    }
-
-    public function position(): BelongsTo
-    {
-        return $this->belongsTo(Position::class);
     }
 }
