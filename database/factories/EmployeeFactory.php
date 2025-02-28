@@ -30,7 +30,7 @@ class EmployeeFactory extends Factory
             'hire_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
             'position_id' => Position::all()->random()->id,
             'salary' => $this->faker->numberBetween(1000000, 3500000),
-            'status' => $this->faker->randomElement(['active', 'inactive', 'on_leave']),
+            'status' => $this->faker->randomElement(['active', 'active', 'active', 'inactive', 'on_leave']),
         ];
     }
 }

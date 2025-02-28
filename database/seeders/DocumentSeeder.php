@@ -19,18 +19,18 @@ class DocumentSeeder extends Seeder
 
         foreach ($employees as $employee) {
             $employee->documents()->create([
-                'name' => 'ID Card',
-                'path' => 'fake/fake-id-card.jpg',
+                'document_type' => 'id_card',
+                'file_path' => asset('fake/fake-id-card.jpg'),
             ]);
 
             $employee->documents()->create([
-                'name' => 'CV',
-                'path' => 'fake/fake-cv.pdf',
+                'document_type' => 'CV',
+                'file_path' => asset('fake/fake-cv.pdf'),
             ]);
 
             $employee->documents()->create([
-                'name' => 'Contract',
-                'path' => 'fake/fake-contract.pdf',
+                'document_type' => 'contract',
+                'file_path' => asset('fake/fake-contract.pdf'),
             ]);
         }
     }

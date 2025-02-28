@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,11 @@ class AttendanceFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'employee_id' => Employee::all()->random()->id,
+            'check_in' => $this->faker->dateTimeThisMonth(),
+            'check_out' => $this->faker->dateTimeThisMonth(),
+            'location' => "{$this->faker->latitude}, {$this->faker->longitude}",
+            'ip_address' => $this->faker->ipv4,
         ];
     }
 }

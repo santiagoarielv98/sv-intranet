@@ -46,12 +46,11 @@ class DocumentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('employee.id')
+                Tables\Columns\TextColumn::make('employee.full_name')
+                    ->searchable(['first_name', 'last_name'])
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('document_type'),
-                Tables\Columns\TextColumn::make('file_path')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
