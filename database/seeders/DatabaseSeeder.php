@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
+            DocumentSeeder::class,
         ]);
     }
 }

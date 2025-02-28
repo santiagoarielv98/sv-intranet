@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Employee;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class DocumentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'employee_id' => Employee::all()->random()->id,
+            'document_type' => $this->faker->randomElement(['CV', 'contract', 'id_card', 'other']),
+            'file_path' => $this->faker->imageUrl(),
         ];
     }
 }
