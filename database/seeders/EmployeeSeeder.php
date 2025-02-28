@@ -17,9 +17,9 @@ class EmployeeSeeder extends Seeder
 
         Employee::factory()->count(50)->create([
             // 'position_id' => Position::all()->random()->id,
-            'country_id' => null,
-            'state_id' => null,
-            'city_id' => null,
+            'country_id' => 11,
+            'state_id' => 3656,
+            'city_id' => 704,
         ]);
     }
 }
