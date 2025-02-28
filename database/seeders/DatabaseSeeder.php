@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $demo->assignRole('panel_user');
 
         $this->call([
+            WorldTableSeeder::class,
             DepartmentSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
@@ -38,7 +39,6 @@ class DatabaseSeeder extends Seeder
             AttendanceSeeder::class,
             LeaveTypeSeeder::class,
             LeaveRequestSeeder::class,
-            WorldTableSeeder::class,
         ]);
     }
 }
