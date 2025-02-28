@@ -53,7 +53,12 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('salary')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'active',
+                        'inactive',
+                        'on_leave',
+                    ])
                     ->required(),
             ]);
     }
