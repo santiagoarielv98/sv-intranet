@@ -55,9 +55,9 @@ class EmployeeResource extends Resource
                     ->numeric(),
                 Forms\Components\Select::make('status')
                     ->options([
-                        'active',
-                        'inactive',
-                        'on_leave',
+                        'active' => 'Active',
+                        'inactive' => 'Inactive',
+                        'on_leave' => 'On Leave',
                     ])
                     ->required(),
             ]);
@@ -67,37 +67,52 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('first_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('last_name')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('first_name')
+                //     ->searchable(),
+                // Tables\Columns\TextColumn::make('last_name')
+                //     ->searchable(),
+                Tables\Columns\TextColumn::make('full_name')
+                    ->searchable(['first_name', 'last_name']),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('postal_code')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('state.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('city.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('hire_date')
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('position.title')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('salary')
                     ->numeric()
+                    ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'active' => 'success',
+                        'inactive' => 'danger',
+                        'on_leave' => 'warning',
+                    }), 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
