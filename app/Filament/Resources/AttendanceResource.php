@@ -20,6 +20,10 @@ class AttendanceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clock';
 
+    protected static ?string $navigationGroup = 'HR Management';
+
+    protected static ?int $navigationSort = 6;
+
     public static function form(Form $form): Form
     {
         return $form
