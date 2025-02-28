@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -27,7 +28,7 @@ class EmployeeFactory extends Factory
             'state_id' => $this->faker->numberBetween(1, 100),
             'city_id' => $this->faker->numberBetween(1, 100),
             'hire_date' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d'),
-            'position_id' => $this->faker->numberBetween(1, 100),
+            'position_id' => Position::all()->random()->id,
             'salary' => $this->faker->numberBetween(1000000, 3500000),
             'status' => $this->faker->randomElement(['active', 'inactive', 'on_leave']),
         ];
