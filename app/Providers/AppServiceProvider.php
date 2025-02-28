@@ -29,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
                     'super_admin',
                 ]));
         });
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->locales(['es', 'en']); // also accepts a closure
-        });
+        // LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+        //     $switch
+        //         ->locales(['es', 'en']); // also accepts a closure
+        // });
     }
 }
