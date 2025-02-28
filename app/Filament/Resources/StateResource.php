@@ -41,19 +41,14 @@ class StateResource extends Resource
             ->schema([
                 Forms\Components\Select::make('country_id')
                     ->relationship('country', 'name')
-                    ->label(__('filament.forms.state.country'))
                     ->required(),
                 Forms\Components\TextInput::make('name')
-                    ->label(__('filament.forms.state.name'))
                     ->required(),
                 Forms\Components\TextInput::make('latitude')
-                    ->label(__('filament.forms.state.latitude'))
                     ->numeric(),
                 Forms\Components\TextInput::make('longitude')
-                    ->label(__('filament.forms.state.longitude'))
                     ->numeric(),
                 Forms\Components\Toggle::make('is_active')
-                    ->label(__('filament.forms.state.is_active'))
                     ->required(),
             ]);
     }
@@ -63,35 +58,27 @@ class StateResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('country.name')
-                    ->label(__('filament.tables.state.country'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('filament.tables.state.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('latitude')
-                    ->label(__('filament.tables.state.latitude'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('longitude')
-                    ->label(__('filament.tables.state.longitude'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\IconColumn::make('is_active')
-                    ->label(__('filament.tables.state.is_active'))
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.tables.state.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.tables.state.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
-                    ->label(__('filament.tables.state.deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

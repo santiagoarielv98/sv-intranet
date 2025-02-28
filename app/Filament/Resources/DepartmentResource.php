@@ -41,10 +41,8 @@ class DepartmentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->label(__('filament.forms.department.name'))
                     ->required(),
                 Forms\Components\Textarea::make('description')
-                    ->label(__('filament.forms.department.description')),
             ]);
     }
 
@@ -57,18 +55,14 @@ class DepartmentResource extends Resource
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->label(__('filament.tables.department.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
-                    ->label(__('filament.tables.department.description'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.tables.department.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.tables.department.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

@@ -20,16 +20,6 @@ class HolidayResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?int $navigationSort = 3;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.holidays.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.holidays.plural_label');
-    }
-
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
@@ -40,11 +30,9 @@ class HolidayResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('calendar_id')
-                    ->label(__('filament.forms.holiday.calendar'))
                     ->relationship('calendar', 'name')
                     ->required(),
                 Forms\Components\DatePicker::make('day')
-                    ->label(__('filament.forms.holiday.day'))
                     ->required(),
             ]);
     }
@@ -54,48 +42,35 @@ class HolidayResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
-                    ->label(__('filament.tables.holiday.calendar'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('filament.tables.holiday.user'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day')
-                    ->label(__('filament.tables.holiday.day'))
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('filament.tables.holiday.type'))
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'decline' => 'danger',
                         'approved' => 'success',
                         'pending' => 'warning',
                     })
-                    ->formatStateUsing(fn(string $state): string => __('filament.enums.status.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.tables.holiday.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.tables.holiday.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                    ->label(__('filament.filters.holiday.type'))
-                    ->options([
-                        'decline' => __('filament.enums.status.decline'),
-                        'approved' => __('filament.enums.status.approved'),
-                        'pending' => __('filament.enums.status.pending'),
-                    ]),
 
             ])
             ->actions([

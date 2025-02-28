@@ -66,16 +66,16 @@ class EmployeeResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('postal_code')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('country_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('state_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('city_id')
-                    ->numeric(),
+                Forms\Components\Select::make('country_id')
+                    ->relationship('country', 'name'),
+                Forms\Components\Select::make('state_id')
+                    ->relationship('state', 'name'),
+                Forms\Components\Select::make('city_id')
+                    ->relationship('city', 'name'),
                 Forms\Components\DatePicker::make('hire_date')
                     ->required(),
-                Forms\Components\TextInput::make('position_id')
-                    ->numeric(),
+                Forms\Components\Select::make('position_id')
+                    ->relationship('position', 'title'),
                 Forms\Components\TextInput::make('salary')
                     ->required()
                     ->numeric(),
@@ -100,19 +100,19 @@ class EmployeeResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('postal_code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('country_id')
+                Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('state_id')
+                Tables\Columns\TextColumn::make('state.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('city_id')
+                Tables\Columns\TextColumn::make('city.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('hire_date')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('position_id')
+                Tables\Columns\TextColumn::make('position.title')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('salary')

@@ -43,7 +43,6 @@ class TimesheetResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('calendar_id')
-                    ->label(__('filament.forms.timesheet.calendar'))
                     ->relationship('calendar', 'name')
                     ->required(),
                 Forms\Components\Select::make('type')
@@ -51,13 +50,10 @@ class TimesheetResource extends Resource
                         'work' => __('filament.enums.type.work'),
                         'pause' => __('filament.enums.type.pause'),
                     ])
-                    ->label(__('filament.common.fields.type'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')
-                    ->label(__('filament.forms.timesheet.day_in'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_out')
-                    ->label(__('filament.forms.timesheet.day_out'))
                     ->required(),
             ]);
     }
@@ -67,15 +63,12 @@ class TimesheetResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
-                    ->label(__('filament.tables.timesheet.calendar'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('filament.tables.timesheet.user'))
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('filament.tables.timesheet.type'))
                     ->badge()
                     ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
                     ->color(fn (string $state): string => match ($state) {
@@ -85,22 +78,18 @@ class TimesheetResource extends Resource
                     })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
-                    ->label(__('filament.tables.timesheet.day_in'))
                     ->dateTime()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day_out')
-                    ->label(__('filament.tables.timesheet.day_out'))
                     ->dateTime()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.tables.timesheet.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.tables.timesheet.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

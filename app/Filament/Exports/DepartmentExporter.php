@@ -14,17 +14,12 @@ class DepartmentExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label(__('filament.common.fields.id')),
-            ExportColumn::make('name')
-                ->label(__('filament.common.fields.name')),
+            ExportColumn::make('id'),
+            ExportColumn::make('name'),
             ExportColumn::make('users_count')
-                ->label(__('filament.common.fields.users_count'))
                 ->counts('users'),
-            ExportColumn::make('created_at')
-                ->label(__('filament.common.fields.created_at')),
-            ExportColumn::make('updated_at')
-                ->label(__('filament.common.fields.updated_at')),
+            ExportColumn::make('created_at'),
+            ExportColumn::make('updated_at'),
         ];
     }
 

@@ -14,28 +14,17 @@ class UserExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label(__('filament.common.fields.id')),
-            ExportColumn::make('name')
-                ->label(__('filament.common.fields.name')),
-            ExportColumn::make('email')
-                ->label(__('filament.common.fields.email')),
+            ExportColumn::make('id'),
+            ExportColumn::make('name'),
+            ExportColumn::make('email'),
             // ExportColumn::make('address')
-            //     ->label(__('filament.common.fields.address')),
             // ExportColumn::make('departments.name')
-            //     ->label(__('filament.common.fields.departments')),
             // ExportColumn::make('postal_code')
-            //     ->label(__('filament.common.fields.postal_code')),
             // ExportColumn::make('country.name')
-            //     ->label(__('filament.common.fields.country')),
             // ExportColumn::make('state.name')
-            //     ->label(__('filament.common.fields.state')),
             // ExportColumn::make('city.name')
-            // ->label(__('filament.common.fields.city')),
-            ExportColumn::make('created_at')
-                ->label(__('filament.common.fields.created_at')),
-            ExportColumn::make('updated_at')
-                ->label(__('filament.common.fields.updated_at')),
+            ExportColumn::make('created_at'),
+            ExportColumn::make('updated_at'),
         ];
     }
 

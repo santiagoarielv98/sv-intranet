@@ -56,17 +56,13 @@ class HolidayResource extends Resource
             ->schema([
                 Forms\Components\Select::make('calendar_id')
                     ->relationship('calendar', 'name')
-                    ->label(__('filament.forms.holiday.calendar'))
                     ->required(),
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->label(__('filament.forms.holiday.user'))
                     ->required(),
                 Forms\Components\DatePicker::make('day')
-                    ->label(__('filament.forms.holiday.day'))
                     ->required(),
                 Forms\Components\Select::make('type')
-                    ->label(__('filament.forms.holiday.type'))
                     ->options([
                         'decline' => __('filament.enums.status.decline'),
                         'approved' => __('filament.enums.status.approved'),
@@ -85,21 +81,17 @@ class HolidayResource extends Resource
             ])
             ->columns([
                 Tables\Columns\TextColumn::make('calendar.name')
-                    ->label(__('filament.tables.holiday.calendar'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label(__('filament.tables.holiday.user'))
                     ->numeric()
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('day')
-                    ->label(__('filament.tables.holiday.day'))
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
-                    ->label(__('filament.tables.holiday.type'))
                     ->badge()
                     ->color(fn(string $state): string => match ($state) {
                         'decline' => 'danger',
@@ -109,19 +101,16 @@ class HolidayResource extends Resource
                     ->formatStateUsing(fn(string $state): string => __('filament.enums.status.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.tables.holiday.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.tables.holiday.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                    ->label(__('filament.filters.holiday.type'))
                     ->options([
                         'decline' => __('filament.enums.status.decline'),
                         'approved' => __('filament.enums.status.approved'),

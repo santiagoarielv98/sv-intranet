@@ -14,22 +14,14 @@ class TimesheetExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label(__('filament.common.fields.id')),
-            ExportColumn::make('calendar.name')
-                ->label(__('filament.common.fields.calendar')),
-            ExportColumn::make('user.name')
-                ->label(__('filament.common.fields.user')),
-            ExportColumn::make('type')
-                ->label(__('filament.common.fields.type')),
-            ExportColumn::make('day_in')
-                ->label(__('filament.common.fields.day_in')),
-            ExportColumn::make('day_out')
-                ->label(__('filament.common.fields.day_out')),
-            ExportColumn::make('created_at')
-                ->label(__('filament.common.fields.created_at')),
-            ExportColumn::make('updated_at')
-                ->label(__('filament.common.fields.updated_at')),
+            ExportColumn::make('id'),
+            ExportColumn::make('calendar.name'),
+            ExportColumn::make('user.name'),
+            ExportColumn::make('type'),
+            ExportColumn::make('day_in'),
+            ExportColumn::make('day_out'),
+            ExportColumn::make('created_at'),
+            ExportColumn::make('updated_at'),
         ];
     }
 

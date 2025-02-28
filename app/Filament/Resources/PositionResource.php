@@ -39,14 +39,13 @@ class PositionResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('title')
-                    ->label(__('filament.common.fields.title'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('department_id')
-                    ->label(__('filament.common.fields.department'))
-                    ->numeric(),
+                Forms\Components\Select::make('department_id')
+                    ->preload()
+                    ->relationship('department', 'name')
+                    ->searchable(),
                 Forms\Components\Textarea::make('description')
-                    ->label(__('filament.common.fields.description'))
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -57,19 +56,15 @@ class PositionResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
-                    ->label(__('filament.common.fields.title'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('department_id')
-                    ->label(__('filament.common.fields.department'))
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('filament.common.fields.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label(__('filament.common.fields.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
