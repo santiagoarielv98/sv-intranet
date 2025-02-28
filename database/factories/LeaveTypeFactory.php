@@ -18,6 +18,8 @@ class LeaveTypeFactory extends Factory
     {
         return [
             //
+            'name' => $this->faker->word,
+            'max_days' => $this->faker->randomDigit,
         ];
     }
 }

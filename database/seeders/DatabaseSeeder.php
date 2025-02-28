@@ -35,6 +35,8 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             DocumentSeeder::class,
             AttendanceSeeder::class,
+            LeaveTypeSeeder::class,
+            LeaveRequestSeeder::class,
         ]);
     }
 }
