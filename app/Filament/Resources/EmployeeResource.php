@@ -91,10 +91,6 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                // Tables\Columns\TextColumn::make('first_name')
-                //     ->searchable(),
-                // Tables\Columns\TextColumn::make('last_name')
-                //     ->searchable(),
                 Tables\Columns\TextColumn::make('full_name')
                     ->searchable(['first_name', 'last_name']),
                 Tables\Columns\TextColumn::make('email')
@@ -105,7 +101,6 @@ class EmployeeResource extends Resource
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('postal_code')
-                    ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('country.name')
                     ->numeric()
@@ -125,6 +120,7 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('position.title')
                     ->numeric()
+                    ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('salary')
                     ->numeric()
@@ -147,7 +143,25 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('position_id')
+                    ->multiple()
+                    ->preload()
+                    ->placeholder('Filtrar por puesto')
+                    ->relationship('position', 'title'),
+
+                Tables\Filters\SelectFilter::make('position.department_id')
+                    ->multiple()
+                    ->preload()
+                    ->placeholder('Filtrar por departamento')
+                    ->relationship('position.department', 'name'),
+                Tables\Filters\SelectFilter::make('status')
+                    ->placeholder('Filtrar por estado')
+                    ->options([
+                        'active' => 'Activo',
+                        'inactive' => 'Inactivo',
+                        'on_leave' => 'En licencia',
+                    ]),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
