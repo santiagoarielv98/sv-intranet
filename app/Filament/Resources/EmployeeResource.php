@@ -4,14 +4,20 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
+use App\Models\City;
 use App\Models\Employee;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
+use Filament\Support\RawJs;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Collection;
 
 class EmployeeResource extends Resource
 {
@@ -41,16 +47,30 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('postal_code')
                     ->maxLength(255),
                 Forms\Components\Select::make('country_id')
+                    ->live()
+                    ->afterStateUpdated(function (Set $set) {
+                        $set('state_id', null);
+                        $set('city_id', null);
+                    })
                     ->relationship('country', 'name'),
                 Forms\Components\Select::make('state_id')
-                    ->relationship('state', 'name'),
+                    ->live()
+                    ->afterStateUpdated(fn(Set $set) => $set('city_id', null))
+                    ->options(fn(Get $get): Collection => State::query()
+                        ->where('country_id', $get('country_id'))
+                        ->pluck('name', 'id')),
                 Forms\Components\Select::make('city_id')
-                    ->relationship('city', 'name'),
+                    ->live()
+                    ->options(fn(Get $get): Collection => City::query()
+                        ->where('state_id', $get('state_id'))
+                        ->pluck('name', 'id')),
                 Forms\Components\DatePicker::make('hire_date')
                     ->required(),
                 Forms\Components\Select::make('position_id')
                     ->relationship('position', 'title'),
                 Forms\Components\TextInput::make('salary')
+                    ->mask(RawJs::make('$money($input)'))
+                    ->stripCharacters(',')
                     ->required()
                     ->numeric(),
                 Forms\Components\Select::make('status')
@@ -112,7 +132,7 @@ class EmployeeResource extends Resource
                         'active' => 'success',
                         'inactive' => 'danger',
                         'on_leave' => 'warning',
-                    }), 
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
