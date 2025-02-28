@@ -28,5 +28,11 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole('super_admin');
         $demo->assignRole('panel_user');
+
+        $this->call([
+            DepartmentSeeder::class,
+            PositionSeeder::class,
+            EmployeeSeeder::class,
+        ]);
     }
 }

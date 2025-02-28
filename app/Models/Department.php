@@ -9,6 +9,7 @@ class Department extends Model
 {
     protected $fillable = [
         'name',
+        'description',
     ];
 
     public function users(): BelongsToMany

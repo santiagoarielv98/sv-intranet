@@ -14,6 +14,39 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Department::create([
+            'name' => 'Marketing',
+            'description' => 'Marketing Department',
+        ]);
+
+        Department::create([
+            'name' => 'Sales',
+            'description' => 'Sales Department',
+        ]);
+
+        Department::create([
+            'name' => 'Finance',
+            'description' => 'Finance Department',
+        ]);
+
+        Department::create([
+            'name' => 'Human Resources',
+            'description' => 'Human Resources Department',
+        ]);
+
+        Department::create([
+            'name' => 'IT',
+            'description' => 'IT Department',
+        ]);
+
+        Department::create([
+            'name' => 'Customer Service',
+            'description' => 'Customer Service Department',
+        ]);
+
+        Department::create([
+            'name' => 'Production',
+            'description' => 'Production Department',
+        ]);
     }
 }

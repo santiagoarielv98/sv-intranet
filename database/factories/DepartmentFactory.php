@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Position>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Department>
  */
-class PositionFactory extends Factory
+class DepartmentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,7 @@ class PositionFactory extends Factory
     {
         return [
             //
-            'title' => $this->faker->jobTitle,
-            'department_id' => $this->faker->numberBetween(1, 10),
+            'name' => $this->faker->name,
             'description' => $this->faker->sentence,
         ];
     }
