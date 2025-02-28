@@ -21,21 +21,6 @@ class DepartmentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-building-office';
     protected static ?int $navigationSort = 7;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.departments.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.departments.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.system-management');
-    }
-
     public static function form(Form $form): Form
     {
         return $form

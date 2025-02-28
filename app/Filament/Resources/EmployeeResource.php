@@ -19,30 +19,9 @@ class EmployeeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.employees.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.employees.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.employees-management');
-    }
-
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::count();
-    }
-
-
-    public static function getNavigationBadgeTooltip(): ?string
-    {
-        return __('filament.badge_tooltip.employees');
     }
 
     public static function form(Form $form): Form

@@ -20,21 +20,6 @@ class TimesheetResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?int $navigationSort = 3;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.timesheet.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.timesheet.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.employees-management');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -46,10 +31,6 @@ class TimesheetResource extends Resource
                     ->relationship('user', 'name')
                     ->required(),
                 Forms\Components\Select::make('type')
-                    ->options([
-                        'work' => __('filament.enums.type.work'),
-                        'pause' => __('filament.enums.type.pause'),
-                    ])
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')
                     ->required(),
@@ -81,7 +62,6 @@ class TimesheetResource extends Resource
                         'pause' => 'danger',
                         default => 'info',
                     })
-                    ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('day_in')
                     ->dateTime()
@@ -102,10 +82,6 @@ class TimesheetResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                    ->options([
-                        'work' => __('filament.enums.type.work'),
-                        'pause' => __('filament.enums.type.pause'),
-                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

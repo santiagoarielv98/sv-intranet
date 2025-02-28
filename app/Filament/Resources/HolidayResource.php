@@ -17,34 +17,14 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class HolidayResource extends Resource
 {
     protected static ?string $model = Holiday::class;
-    // protected static ?string $navigationGroup = __('filament.navigation.groups.employees-management');
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?int $navigationSort = 3;
-
-    public static function getLabel(): string
-    {
-        return __('filament.resources.holidays.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.holidays.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.employees-management');
-    }
 
     public static function getNavigationBadge(): ?string
     {
         return static::getModel()::where('type', 'pending')->count();
     }
 
-    public static function getNavigationBadgeTooltip(): ?string
-    {
-        return __('filament.badge_tooltip.holidays');
-    }
     public static function getNavigationBadgeColor(): string|array|null
     {
         return 'warning';
@@ -63,11 +43,6 @@ class HolidayResource extends Resource
                 Forms\Components\DatePicker::make('day')
                     ->required(),
                 Forms\Components\Select::make('type')
-                    ->options([
-                        'decline' => __('filament.enums.status.decline'),
-                        'approved' => __('filament.enums.status.approved'),
-                        'pending' => __('filament.enums.status.pending'),
-                    ])
                     ->required(),
             ]);
     }
@@ -98,7 +73,6 @@ class HolidayResource extends Resource
                         'approved' => 'success',
                         'pending' => 'warning',
                     })
-                    ->formatStateUsing(fn(string $state): string => __('filament.enums.status.' . $state))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -111,11 +85,6 @@ class HolidayResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                    ->options([
-                        'decline' => __('filament.enums.status.decline'),
-                        'approved' => __('filament.enums.status.approved'),
-                        'pending' => __('filament.enums.status.pending'),
-                    ]),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),

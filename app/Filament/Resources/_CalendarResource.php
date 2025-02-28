@@ -19,21 +19,6 @@ class CalendarResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
     protected static ?int $navigationSort = 6;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.calendars.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.calendars.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.system-management');
-    }
-
     public static function form(Form $form): Form
     {
         return $form

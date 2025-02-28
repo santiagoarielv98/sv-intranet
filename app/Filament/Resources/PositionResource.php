@@ -19,21 +19,6 @@ class PositionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.positions.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.positions.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.employees-management');
-    }
-
     public static function form(Form $form): Form
     {
         return $form

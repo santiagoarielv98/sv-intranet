@@ -23,16 +23,6 @@ class TimesheetResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-table-cells';
     protected static ?int $navigationSort = 3;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.timesheet.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.timesheet.plural_label');
-    }
-
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id', Auth::user()->id);
@@ -46,10 +36,6 @@ class TimesheetResource extends Resource
                     ->relationship('calendar', 'name')
                     ->required(),
                 Forms\Components\Select::make('type')
-                    ->options([
-                        'work' => __('filament.enums.type.work'),
-                        'pause' => __('filament.enums.type.pause'),
-                    ])
                     ->required(),
                 Forms\Components\DateTimePicker::make('day_in')
                     ->required(),
@@ -70,8 +56,7 @@ class TimesheetResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('type')
                     ->badge()
-                    ->formatStateUsing(fn(string $state): string => __('filament.enums.type.' . $state))
-                    ->color(fn (string $state): string => match ($state) {
+                    ->color(fn(string $state): string => match ($state) {
                         'work' => 'success',
                         'pause' => 'danger',
                         default => 'info',
@@ -96,10 +81,6 @@ class TimesheetResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('type')
-                    ->options([
-                        'work' => __('filament.enums.type.work'),
-                        'pause' => __('filament.enums.type.pause'),
-                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

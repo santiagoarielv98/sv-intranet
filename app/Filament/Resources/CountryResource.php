@@ -19,21 +19,6 @@ class CountryResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-flag';
     protected static ?int $navigationSort = 3;
 
-    public static function getLabel(): string
-    {
-        return __('filament.resources.countries.label');
-    }
-
-    public static function getPluralLabel(): string
-    {
-        return __('filament.resources.countries.plural_label');
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('filament.navigation.groups.system-management');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
