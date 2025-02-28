@@ -59,11 +59,6 @@ class Employee extends Model
         return $this->belongsTo(Position::class);
     }
 
-    public function timesheets(): HasMany
-    {
-        return $this->hasMany(Timesheet::class);
-    }
-
     protected function fullName(): Attribute
     {
         return Attribute::make(

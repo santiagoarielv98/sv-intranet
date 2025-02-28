@@ -23,12 +23,6 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?int $navigationSort = 2;
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function form(Form $form): Form
     {
@@ -68,18 +62,6 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('address')
-                //     ->sortable()
-                //     ->searchable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
-                // Tables\Columns\TextColumn::make('postal_code')
-                //     ->sortable()
-                //     ->searchable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
-                // Tables\Columns\TextColumn::make('departments.name')
-                //     ->badge()
-                //     ->searchable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('employee')
                     ->formatStateUsing(fn(User $record): View => $record->full_name)
                     ->searchable(),
