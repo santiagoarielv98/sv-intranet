@@ -59,6 +59,11 @@ class Employee extends Model
         return $this->belongsTo(Position::class);
     }
 
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
+
     protected function fullName(): Attribute
     {
         return Attribute::make(
