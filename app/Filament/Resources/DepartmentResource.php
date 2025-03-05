@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Exports\DepartmentExporter;
 use App\Filament\Resources\DepartmentResource\Pages;
 use App\Filament\Resources\DepartmentResource\RelationManagers;
 use App\Models\Department;
@@ -36,10 +35,6 @@ class DepartmentResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->headerActions([
-                Tables\Actions\ExportAction::make()
-                    ->exporter(DepartmentExporter::class)
-            ])
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -64,8 +59,6 @@ class DepartmentResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-                Tables\Actions\ExportBulkAction::make()
-                    ->exporter(DepartmentExporter::class)
             ]);
     }
 
