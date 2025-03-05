@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\AttendanceExporter;
 use App\Filament\Resources\AttendanceResource\Pages;
 use App\Filament\Resources\AttendanceResource\RelationManagers;
 use App\Models\Attendance;
@@ -29,6 +30,7 @@ class AttendanceResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('employee_id')
+                    ->searchable(['first_name', 'last_name'])
                     ->options(Employee::all()->pluck('full_name', 'id'))
                     ->required(),
                 Forms\Components\DateTimePicker::make('check_in')
@@ -55,8 +57,10 @@ class AttendanceResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ip_address')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -68,14 +72,40 @@ class AttendanceResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('employee_id')
+                    ->multiple()
+                    ->options(Employee::all()->pluck('full_name', 'id')),
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\DatePicker::make('check_in'),
+                        Forms\Components\DatePicker::make('check_out'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['check_in'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('check_in', '>=', $date),
+                            )
+                            ->when(
+                                $data['check_out'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('check_out', '<=', $date),
+                            );
+                    })
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\ExportAction::make()
+                        ->exporter(AttendanceExporter::class),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ExportBulkAction::make()
+                        ->exporter(AttendanceExporter::class)
+
                 ]),
             ])
             ->defaultSort('check_in', 'desc');
