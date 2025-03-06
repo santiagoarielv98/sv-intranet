@@ -6,6 +6,7 @@ namespace App\Models;
 
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -57,5 +58,18 @@ class User extends Authenticatable implements FilamentUser
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        $panel = $panel->getId();
+
+        if ($panel === 'admin') {
+            return $this->hasRole('super_admin');
+        } elseif ($panel === 'personal') {
+            return $this->hasRole(['super_admin', 'panel_user']);
+        }
+
+        return false;
     }
 }

@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             $user = User::factory()->create([
                 'name' => $employee->full_name,
                 'email' => $employee->email,
+                'employee_id' => $employee->id,
             ]);
 
             $user->assignRole('panel_user');
