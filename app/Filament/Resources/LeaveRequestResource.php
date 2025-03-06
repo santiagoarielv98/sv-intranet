@@ -38,7 +38,13 @@ class LeaveRequestResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('end_date')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'approved' => 'Approved',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->default('pending')
                     ->required(),
                 Forms\Components\Textarea::make('comments')
                     ->columnSpanFull(),
@@ -89,7 +95,8 @@ class LeaveRequestResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array

@@ -2,24 +2,22 @@
 
 namespace App\Filament\Personal\Resources;
 
-use App\Filament\Personal\Resources\AttendanceResource\Pages;
-use App\Filament\Personal\Resources\AttendanceResource\RelationManagers;
-use App\Models\Attendance;
+use App\Filament\Personal\Resources\LeaveRequestResource\Pages;
+use App\Filament\Personal\Resources\LeaveRequestResource\RelationManagers;
+use App\Models\LeaveRequest;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Auth;
 
-class AttendanceResource extends Resource
+class LeaveRequestResource extends Resource
 {
-    protected static ?string $model = Attendance::class;
+    protected static ?string $model = LeaveRequest::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clock';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     protected static ?string $navigationGroup = 'HR Management';
 
@@ -32,19 +30,15 @@ class AttendanceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('employee_id')
-                    ->relationship('employee', 'id')
-                    ->disabled()
-                    ->default(auth()->user()->employee->id ?? -1)
-                    ->getOptionLabelFromRecordUsing(fn(Model $record) => $record->full_name)
+                Forms\Components\Select::make('leave_type_id')
+                    ->relationship('leaveType', 'name')
                     ->required(),
-                Forms\Components\DateTimePicker::make('check_in')
+                Forms\Components\DatePicker::make('start_date')
                     ->required(),
-                Forms\Components\DateTimePicker::make('check_out'),
-                Forms\Components\TextInput::make('location')
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('ip_address')
-                    ->maxLength(45),
+                Forms\Components\DatePicker::make('end_date')
+                    ->required(),
+                Forms\Components\Textarea::make('comments')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -52,18 +46,23 @@ class AttendanceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('employee.full_name')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('check_in')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('leaveType.name')
+                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('check_out')
-                    ->dateTime()
+                Tables\Columns\TextColumn::make('start_date')
+                    ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('location')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('ip_address')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('end_date')
+                    ->date()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'pending' => 'warning',
+                        'approved' => 'success',
+                        'rejected' => 'danger',
+                        default => 'primary',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -77,14 +76,14 @@ class AttendanceResource extends Resource
                 //
             ])
             ->actions([
-
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 // Tables\Actions\BulkActionGroup::make([
                 //     Tables\Actions\DeleteBulkAction::make(),
                 // ]),
             ])
-            ->defaultSort('check_in', 'desc');
+            ->defaultSort('created_at', 'desc');
     }
 
     public static function getRelations(): array
@@ -97,8 +96,8 @@ class AttendanceResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAttendances::route('/'),
-            'create' => Pages\CreateAttendance::route('/create'),
+            'index' => Pages\ListLeaveRequests::route('/'),
+            'create' => Pages\CreateLeaveRequest::route('/create')
         ];
     }
 
