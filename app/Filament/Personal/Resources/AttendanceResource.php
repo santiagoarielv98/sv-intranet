@@ -5,6 +5,7 @@ namespace App\Filament\Personal\Resources;
 use App\Filament\Personal\Resources\AttendanceResource\Pages;
 use App\Filament\Personal\Resources\AttendanceResource\RelationManagers;
 use App\Models\Attendance;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -77,12 +78,14 @@ class AttendanceResource extends Resource
                 //
             ])
             ->actions([
-
+                Tables\Actions\ViewAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ])
             ->defaultSort('check_in', 'desc');
     }
