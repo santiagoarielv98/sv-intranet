@@ -6,8 +6,6 @@ use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use BezhanSalleh\PanelSwitch\PanelSwitch;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
-use App\Notifications\Notification;
-use Filament\Notifications\Notification as BaseNotification;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
-        $this->app->bind(BaseNotification::class, Notification::class);
+        // $this->app->bind(BaseNotification::class, Notification::class);
+        $this->app->bind('App\Services\StatsService', function () {
+            return new \App\Services\StatsService();
+        });
     }
 
     /**
@@ -31,9 +32,9 @@ class AppServiceProvider extends ServiceProvider
                     'super_admin',
                 ]));
         });
-        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
-            $switch
-                ->locales(['es', 'en']); // also accepts a closure
-        });
+        // LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+        //     $switch
+        //         ->locales(['es', 'en']); // also accepts a closure
+        // });
     }
 }

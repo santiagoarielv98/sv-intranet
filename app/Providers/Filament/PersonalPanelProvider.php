@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use Filament\Http\Middleware\Authenticate;
+use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -24,11 +25,9 @@ class PersonalPanelProvider extends PanelProvider
     {
         return $panel
             ->id('personal')
-            ->default()
             ->path('personal')
-            ->login()
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Amber,
             ])
             ->discoverResources(in: app_path('Filament/Personal/Resources'), for: 'App\\Filament\\Personal\\Resources')
             ->discoverPages(in: app_path('Filament/Personal/Pages'), for: 'App\\Filament\\Personal\\Pages')
@@ -51,11 +50,11 @@ class PersonalPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->databaseNotifications()
             ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-
+                FilamentShieldPlugin::make(),
             ])
+            ->databaseNotifications()
+            ->login()
             ->authMiddleware([
                 Authenticate::class,
             ]);

@@ -15,30 +15,38 @@ class DepartmentSeeder extends Seeder
     public function run(): void
     {
         Department::create([
-            'name' => 'Administración',
-        ]);
-
-        Department::create([
-            'name' => 'Desarrollo',
-        ]);
-        Department::create([
-            'name' => 'Ventas',
-        ]);
-        Department::create([
             'name' => 'Marketing',
-        ]);
-        Department::create([
-            'name' => 'Recursos Humanos',
-        ]);
-        Department::create([
-            'name' => 'Finanzas',
+            'description' => 'Marketing Department',
         ]);
 
-        $nonSuperAdmin = User::withoutRole('super_admin')->get();
-        $departments = Department::all();
+        Department::create([
+            'name' => 'Sales',
+            'description' => 'Sales Department',
+        ]);
 
-        foreach ($nonSuperAdmin as $user) {
-            $user->departments()->attach($departments->random()->id);
-        }
+        Department::create([
+            'name' => 'Finance',
+            'description' => 'Finance Department',
+        ]);
+
+        Department::create([
+            'name' => 'Human Resources',
+            'description' => 'Human Resources Department',
+        ]);
+
+        Department::create([
+            'name' => 'IT',
+            'description' => 'IT Department',
+        ]);
+
+        Department::create([
+            'name' => 'Customer Service',
+            'description' => 'Customer Service Department',
+        ]);
+
+        Department::create([
+            'name' => 'Production',
+            'description' => 'Production Department',
+        ]);
     }
 }
