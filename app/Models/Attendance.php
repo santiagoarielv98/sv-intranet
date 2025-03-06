@@ -29,12 +29,10 @@ class Attendance extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->check_out) {
-                    $checkIn = new \DateTime($this->check_in);
-                    $checkOut = new \DateTime($this->check_out);
-                    $interval = $checkIn->diff($checkOut);
-                    return $interval->format('%H:%I:%S');
-                }
+                $checkIn = new \DateTime($this->check_in);
+                $checkOut = new \DateTime($this->check_out ?? now());
+                $interval = $checkIn->diff($checkOut);
+                return $interval->format('%H:%I:%S');
             }
         );
     }

@@ -61,6 +61,8 @@ class AttendanceResource extends Resource
                 Tables\Columns\TextColumn::make('check_out')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('hours_worked')
+                ->time(),
                 Tables\Columns\TextColumn::make('location')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('ip_address')

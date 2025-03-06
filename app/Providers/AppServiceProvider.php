@@ -16,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         // $this->app->bind(BaseNotification::class, Notification::class);
+        $this->app->bind('App\Services\StatsService', function () {
+            return new \App\Services\StatsService();
+        });
     }
 
     /**
